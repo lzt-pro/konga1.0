@@ -3,10 +3,11 @@
     'use strict';
 
     angular.module('frontend.dashboard', [
-        'chart.js'
+        'chart.js','pascalprecht.translate'
     ]);
 
     // Module configuration
+    //路由的配置
     angular.module('frontend.dashboard')
         .config([
             '$stateProvider',
@@ -34,6 +35,21 @@
                     })
                 ;
             }
-        ])
-    ;
+        ]);
+
+    angular.module('frontend.dashboard',['pascalprecht.translate'])
+        .config(['$translateProvider',function ($translateProvider) {
+            let lang;
+            if(window.localStorage.lang === undefined || window.localStorage.lang === "undefined"){
+                lang = 'ch'
+            }else {
+                lang = window.localStorage.lang;
+            }
+            $translateProvider.preferredLanguage(lang);
+            $translateProvider.useStaticFilesLoader({
+                prefix:"../i18n/",
+                suffix:".json"
+            });
+        }]);
+
 }());

@@ -73,8 +73,7 @@
   },
   "main": "app.js",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/pantsel/konga.git"
+    "type": "git"
   },
   "author": "Tselentis Panagis",
   "license": "MIT"

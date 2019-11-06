@@ -6,18 +6,27 @@
 (function() {
   'use strict';
 
+
   angular.module('frontend.dashboard')
     .controller('DashboardController', [
       '$scope', '$rootScope','$log', '$state','$q','InfoService','$localStorage','HttpTimeout', '$location',
-        'SettingsService', 'NodeModel','$timeout', 'MessageService','UserModel','UserService','Semver','$http',
-      function controller($scope,$rootScope, $log, $state,$q,InfoService,$localStorage,HttpTimeout, $location,
-                          SettingsService, NodeModel, $timeout, MessageService, UserModel, UserService, Semver, $http) {
+        'SettingsService', 'NodeModel','$timeout', 'MessageService','UserModel','UserService','Semver','$http', '$translate',
+      function controller($scope,$rootScope, $log, $state,$q,InfoService,$localStorage,HttpTimeout, $location,$translate,
+                          SettingsService, NodeModel, $timeout, MessageService, UserModel, UserService, Semver, $http,) {
 
 
           var loadTime = $rootScope.KONGA_CONFIG.info_polling_interval,
               errorCount = 0,
               hasInitiallyLoaded = false,
               loadPromise;
+
+          /*$scope.changeLanguage = function(langKey){
+              $translate.use(langKey)
+          };*/
+
+          $scope.changeLanguage=function (langKey) {
+              $translate.use(langKey);
+          };
 
           $scope.loading = true;
           $scope.hasConnections = false;
@@ -329,4 +338,5 @@
       }
     ])
   ;
+
 }());
