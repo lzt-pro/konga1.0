@@ -10,8 +10,8 @@
   angular.module('frontend.dashboard')
     .controller('DashboardController', [
       '$scope', '$rootScope','$log', '$state','$q','InfoService','$localStorage','HttpTimeout', '$location',
-        'SettingsService', 'NodeModel','$timeout', 'MessageService','UserModel','UserService','Semver','$http', '$translate',
-      function controller($scope,$rootScope, $log, $state,$q,InfoService,$localStorage,HttpTimeout, $location,$translate,
+        'SettingsService', 'NodeModel','$timeout', 'MessageService','UserModel','UserService','Semver','$http',
+      function controller($scope,$rootScope, $log, $state,$q,InfoService,$localStorage,HttpTimeout, $location,
                           SettingsService, NodeModel, $timeout, MessageService, UserModel, UserService, Semver, $http,) {
 
 

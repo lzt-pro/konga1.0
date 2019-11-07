@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('frontend.dashboard', [
-        'chart.js','pascalprecht.translate'
+        'chart.js'
     ]);
 
     // Module configuration
@@ -36,20 +36,4 @@
                 ;
             }
         ]);
-
-    angular.module('frontend.dashboard',['pascalprecht.translate'])
-        .config(['$translateProvider',function ($translateProvider) {
-            let lang;
-            if(window.localStorage.lang === undefined || window.localStorage.lang === "undefined"){
-                lang = 'ch'
-            }else {
-                lang = window.localStorage.lang;
-            }
-            $translateProvider.preferredLanguage(lang);
-            $translateProvider.useStaticFilesLoader({
-                prefix:"../i18n/",
-                suffix:".json"
-            });
-        }]);
-
 }());
