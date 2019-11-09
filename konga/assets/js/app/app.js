@@ -26,8 +26,7 @@
     'frontend.cluster',
     'frontend.healthchecks',
     'frontend.services',
-    'frontend.routes'
-
+    'frontend.routes',
   ]);
 
 
@@ -43,7 +42,6 @@
     .config(function ($logProvider) {
       $logProvider.debugEnabled(window.enableLogs);
     })
-
     .value('HttpTimeout', 20000)
 
     // Provider to disable UI routers template caching
@@ -158,7 +156,6 @@
       }
     ])
   ;
-
 
   /**
    * Frontend application run hook configuration. This will attach auth status

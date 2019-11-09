@@ -71,7 +71,8 @@ var jsFilesToInject = [
   "bower_components/angular-chart.js/dist/angular-chart.js",
   "bower_components/angular-base64/angular-base64.js",
   "bower_components/angular-google-chart/ng-google-chart.js",
-
+  "bower_components/angular-translate/angular-translate.js",
+  "bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js",
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
   'js/app/**/*.js'
@@ -88,7 +89,8 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+   'templates/**/*.html',
+   'templates/**/*.json'
 ];
 
 

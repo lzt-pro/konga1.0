@@ -57,36 +57,36 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         <i class="mdi mdi-lan-connect"></i>&nbsp;
-                        链接（Connections）
+                        {{"dashboard_connections" | I18N}}}
                         <span class="pull-right" uib-tooltip="{{status.server.total_requests}}">
-                            Total Requests: <strong>{{convert2Unit(status.server.total_requests)}}</strong>
+                            {{"dashboard_total_requests" | I18N}}: <strong>{{convert2Unit(status.server.total_requests)}}</strong>
                         </span>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="row text-center">
                         <div class="col-sm-2" uib-tooltip="{{status.server.connections_active}}">
-                            <strong>ACTIVE</strong>
+                            <strong>{{"dashboard_active" | I18N}}</strong>
                             <h3>{{convert2Unit(status.server.connections_active)}}</h3>
                         </div>
                         <div class="col-sm-2" uib-tooltip="{{status.server.connections_reading}}">
-                            <strong>READING</strong>
+                            <strong>{{"dashboard_reading" | I18N}}</strong>
                             <h3>{{convert2Unit(status.server.connections_reading)}}</h3>
                         </div>
                         <div class="col-sm-2" uib-tooltip="{{status.server.connections_writing}}">
-                            <strong>WRITING</strong>
+                            <strong>{{"dashboard_writing" | I18N}}</strong>
                             <h3>{{convert2Unit(status.server.connections_writing)}}</h3>
                         </div>
                         <div class="col-sm-2" uib-tooltip="{{status.server.connections_waiting}}">
-                            <strong>WAITING</strong>
+                            <strong>{{"dashboard_waiting" | I18N}}</strong>
                             <h3>{{convert2Unit(status.server.connections_waiting)}}</h3>
                         </div>
                         <div class="col-sm-2" uib-tooltip="{{status.server.connections_accepted}}">
-                            <strong>ACCEPTED</strong>
+                            <strong>{{"dashboard_accepted" | I18N}}</strong>
                             <h3>{{convert2Unit(status.server.connections_accepted)}}</h3>
                         </div>
                         <div class="col-sm-2" uib-tooltip="{{status.server.connections_handled}}">
-                            <strong>HANDLED</strong>
+                            <strong>{{"dashboard_handled" | I18N}}</strong>
                             <h3>{{convert2Unit(status.server.connections_handled)}}</h3>
                         </div>
                     </div>
@@ -128,23 +128,23 @@
                 </div>
                 <table class="table no-margin">
                     <tr>
-                        <th></th>
+                        <th>{{'dashboard_host_name' | I18N}}</th>
                         <td>{{info.hostname}}</td>
                     </tr>
                     <tr>
-                        <th>Tag Line</th>
+                        <th>{{"dashboard_tag_line" | I18N}}</th>
                         <td>{{info.tagline}}</td>
                     </tr>
                     <tr>
-                        <th>版本</th>
+                        <th>{{"dashboard_version" | I18N}}</th>
                         <td>{{info.version}}</td>
                     </tr>
                     <tr>
-                        <th>LUA Version</th>
+                        <th>{{"dashboard_lua_version" | I18N}}</th>
                         <td>{{info.lua_version}}</td>
                     </tr>
                     <tr>
-                        <th>Admin listen</th>
+                        <th>{{"dashboard_admin_listen" | I18N}}</th>
                         <td>{{info.configuration.admin_listen}}</td>
                     </tr>
                 </table>
@@ -157,7 +157,7 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         <i class="mdi mdi-timer"></i>&nbsp;
-                        TIMERS
+                        {{"dashboard_times" | I18N}}
                     </div>
                 </div>
                 <div class="panel-body">
@@ -178,7 +178,7 @@
             <div class="panel panel-default" vertilize>
                 <div class="panel-heading">
                     <div class="panel-title">
-                        <i class="mdi mdi-information-outline"></i>&nbsp;DATASTORE INFO
+                        <i class="mdi mdi-information-outline"></i>&nbsp;{{"dashboard_datastore_info" | I18N}}
                         <span ng-if="isGatewayVersionEqOrGreater('0.11.0')"
                               ng-class="{'text-success' : status.database.reachable, 'text-danger' : !status.database.reachable}"
                               class="pull-right">
@@ -188,31 +188,31 @@
                 </div>
                 <table class="table no-margin">
                     <tr>
-                        <th>DBMS</th>
+                        <th>{{"dashboard_dbms" | I18N}}</th>
                         <td>{{info.configuration.database}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'postgres'">
-                        <th>Host</th>
+                        <th>{{"dashboard_host" | I18N}}</th>
                         <td>{{info.configuration.pg_host}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'cassandra' && info.configuration.cassandra_contact_points">
-                        <th>Contact points</th>
+                        <th>{{"dashboard_database" | I18N}}</th>
                         <td>{{info.configuration.cassandra_contact_points.join(", ")}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'cassandra' && info.configuration.cassandra_keyspace">
-                        <th>Keyspace</th>
+                        <th>{{"dashboard_keyspace" | I18N}}</th>
                         <td>{{info.configuration.cassandra_keyspace}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'cassandra' && info.configuration.cassandra_data_centers">
-                        <th>Data Centers</th>
+                        <th>{{"dashboard_data_centers" | I18N}}</th>
                         <td>{{info.configuration.cassandra_data_centers.join(", ")}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'postgres'">
-                        <th>Database</th>
+                        <th>{{"dashboard_database" | I18N}}}</th>
                         <td>{{info.configuration.pg_database}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'postgres'">
-                        <th>User</th>
+                        <th>{{"dashboard_user" | I18N}}}</th>
                         <td>{{info.configuration.pg_user}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'cassandra'">
@@ -220,11 +220,11 @@
                         <td>{{info.configuration.cassandra_username}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'postgres'">
-                        <th>Port</th>
+                        <th>{{"dashboard_port" | I18N}}</th>
                         <td>{{info.configuration.pg_port}}</td>
                     </tr>
                     <tr ng-if="info.configuration.database == 'cassandra'">
-                        <th>Port</th>
+                        <th>{{"dashboard_port" | I18N}}</th>
                         <td>{{info.configuration.cassandra_port}}</td>
                     </tr>
                 </table>
@@ -241,7 +241,7 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         <i class="mdi mdi-power-plug"></i>&nbsp;
-                        PLUGINS
+                        {{"dashboard_plugins" | I18N}}
                     </div>
                 </div>
                 <div class="panel-body">
