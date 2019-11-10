@@ -8,8 +8,8 @@
 
   angular.module('frontend.info')
     .controller('InfoController', [
-      '$scope', '$log', '$state','InfoService',
-      function controller($scope, $log, $state,InfoService) {
+      '$scope', '$log', '$state','InfoService','I18N',
+      function controller($scope, $log, $state,InfoService, I18N) {
 
           function _getInfo() {
              InfoService.getInfo()
@@ -19,7 +19,7 @@
           }
 
           _getInfo()
-
+          $scope.name = I18N.T('name');
           $scope.$on('user.node.updated',function(node){
               _getInfo()
           })

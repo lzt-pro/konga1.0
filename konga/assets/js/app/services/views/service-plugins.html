@@ -1,14 +1,14 @@
 <div class="col-md-12 bg-light-grey padding margin-bottom">
     <div class="col-md-6 text-left">
         <h4>
-            Assigned plugins
+            {{"services_plugins_assigned_plugins" | I18N}}
 
         </h4>
     </div>
     <div class="col-md-6 text-right" ng-if="canCreate">
         <button class="btn btn-primary btn-flat" style="margin-top: 5px" ng-click="onAddPlugin()">
             <i class="mdi mdi-plus"></i>
-            add plugin
+            {{"services_plugins_add_plugin" | I18N}}
         </button>
     </div>
 </div>
@@ -30,9 +30,9 @@
         <th width="1"></th>
         <th width="1"></th>
         <th width="1"></th>
-        <th>Name</th>
-        <th>Consumer</th>
-        <th>Created</th>
+        <th>{{"services_plugins_name" | I18N}}</th>
+        <th>{{"services_plugins_consumer" | I18N}}</th>
+        <th>{{"services_plugins_create" | I18N}}</th>
         <th width="1" ng-if="canDelete"></th>
     </tr>
     <tr
@@ -69,13 +69,13 @@
         <td ng-if="canDelete">
             <button class="btn btn-link btn-danger" ng-click="deletePlugin(item)">
                 <i class="mdi mdi-delete"></i>
-                delete
+                {{"services_plugins_delete" | I18N}}
             </button>
         </td>
     </tr>
     <tr data-ng-if="plugins.data.length === 0">
         <td colspan="100%" class="text-center text-muted">
-            <em>no data found...</em>
+            <em>{{"services_plugins_no_data" | I18N}}</em>
         </td>
     </tr>
 </table>

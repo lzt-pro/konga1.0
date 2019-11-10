@@ -1,14 +1,14 @@
 <div class="col-md-12 bg-light-grey padding margin-bottom">
     <div class="col-md-6 text-left">
         <h4>
-            Routes
+            {{"services_routes_routes" | I18N}}
 
         </h4>
     </div>
     <div class="col-md-6 text-right" ng-if="canCreate">
         <button class="btn btn-primary btn-flat" style="margin-top: 5px" ng-click="onAddRoute()">
             <i class="mdi mdi-plus"></i>
-            add route
+            {{"services_routes_add_route" | I18N}}
         </button>
     </div>
 </div>
@@ -27,13 +27,13 @@
     <table class="table">
         <tr>
             <th width="1"></th>
-            <th>Name / ID</th>
-            <th>Hosts</th>
-            <th>Paths</th>
-            <th>Protocols</th>
-            <th>Methods</th>
-            <th>Regex priority</th>
-            <th>Created</th>
+            <th>{{"services_routes_name" | I18N}}</th>
+            <th>{{"services_routes_hosts" | I18N}}</th>
+            <th>{{"services_routes_paths" | I18N}}</th>
+            <th>{{"service_routes_protocols" | I18N}}</th>
+            <th>{{"services_routes_methods" | I18N}}</th>
+            <th>{{"services_routes_regex_priority" | I18N}}</th>
+            <th>{{"services_routes_created" | I18N}}</th>
             <th width="1" ng-if="canEdit"></th>
             <th width="1" ng-if="canDelete"></th>
         </tr>
@@ -66,19 +66,19 @@
             <td ng-if="canEdit">
                 <a class="clickable btn btn-link btn-warning" data-ui-sref="routes.read({route_id:item.id})">
                     <i class="mdi mdi-pencil"></i>
-                    edit
+                    {{"services_routes_edit" | I18N}}
                 </a>
             </td>
             <td ng-if="canDelete">
                 <button class="btn btn-link btn-danger" ng-click="deleteRoute(item)">
                     <i class="mdi mdi-delete"></i>
-                    delete
+                    {{"services_routes_delete" | I18N}}
                 </button>
             </td>
         </tr>
         <tr data-ng-if="routes.data.length === 0">
             <td colspan="100%" class="text-center text-muted">
-                <em>no data found...</em>
+                <em>{{"services_routes_no_data" | I18N}}</em>
             </td>
         </tr>
     </table>

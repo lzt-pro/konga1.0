@@ -5,7 +5,7 @@
             ng-if="user.hasPermission($state.name.split('.')[0],'create')"
             ng-click="openAddServiceModal()">
             <i class="mdi mdi-plus"></i>
-            Add New Service
+            {{"services_add_new_service" | I18N}}
         </a>
         <list-search
                 class="pull-right"
@@ -76,7 +76,7 @@
                     <td ng-if="user.hasPermission($state.name.split('.')[0],'delete')">
                         <button type="button" ng-click="deleteItem($index,service)" class="btn btn-danger btn-link">
                             <i class="mdi mdi-delete"></i>
-                            Delete
+                            {{"services_delete" | I18N}}
                         </button>
                     </td>
                 </tr>

@@ -2,7 +2,7 @@
     <div class="col-md-6 text-left">
         <h4>
             <i class="mdi mdi-heart-pulse"></i>
-            Health Checks
+            {{"services_health_checks" | I18N}}
 
         </h4>
     </div>
@@ -25,27 +25,25 @@
         <br>
         <form>
             <div class="alert alert-info">
-                Administrators can also be notified via email
-                when an API is down or unresponsive
-                by enabling <code>Email Notifications</code> in <code>settings</code>.
+                {{"services_health_alert_info" | I18N}} <code>{{"services_health_email_notifications" |I18N}}</code> {{"services_health_in" | I18N}} <code>{{"services_health_settings" |I18N}}</code>.
             </div>
             <div class="alert alert-danger" ng-if="serviceHC.active && !serviceHC.health_check_endpoint">
-                You need to define an HC Endpoint in order for health checks to work
+                {{"services_health_danger" |I18N}}
             </div>
             <div class="form-group">
-                <label>HC Endpoint <span class="text-danger">*</span></label>
+                <label>{{"services_health_hc_point" |I18N}} <span class="text-danger">*</span></label>
                 <input type="text" ng-model="serviceHC.health_check_endpoint" class="form-control" required placeholder="ex. http://my-api/endpoint">
-                <p class="help-block"><small>Konga will perform a <code>GET</code> request to the specified endpoint every minute.</small></p>
+                <p class="help-block"><small>{{"services_health_konga_will_perform" |I18N}} <code>GET</code> {{"services_health_endpoint" | I18N}}</small></p>
             </div>
             <div class="form-group">
-                <label>Notification Endpoint <small class="text-muted">(optional)</small></label>
+                <label>{{"services_health_notification_endpoint" |I18N}}<small class="text-muted">{{"services_health_optional" | I18N}}</small></label>
                 <input type="text" ng-model="serviceHC.notification_endpoint" class="form-control" placeholder="ex. http://my-api/endpoint">
-                <p class="help-block"><small>Konga will perform a <code>POST</code> request to the specified endpoint the first time a health check fails and one every 15 minutes the API stays down or unresponsive.</small></p>
+                <p class="help-block"><small>{{"services_health_post_small"| I18N}} <code>POST</code>{{"services_health_post_request" | I18N}}</small></p>
             </div>
             <hr>
             <div class="form-group">
                 <button class="btn btn-primary btn-block" ng-click="save()">
-                    save changes
+                    {{"services_health_save_changes" | I18N}}
                 </button>
             </div>
 
@@ -55,49 +53,48 @@
     <uib-tab index="1" heading="STATUS">
         <br>
         <div data-ng-show="!serviceHC.data">
-            <h5>No info available yet...</h5>
-            <p class="help-block" ng-if="!serviceHC.active">
-                You need to enable health checks for this API
-                in order to start getting HC status information.
+            <h5>{{"services_health_no_info" | I18N}}</h5>
+            <p class="" ng-if="!serviceHC.active">
+                {{"services_health_help_block" | I18N}}
             </p>
             <p class="help-block" ng-if="serviceHC.active">
-                Try again later...
+                {{"services_health_try_again" | I18N}}
             </p>
         </div>
         <div data-ng-show="serviceHC.data" class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    <th>Last known status</th>
+                    <th>{{"service_health_last_status" | I18N}}</th>
                     <td>
                         <strong ng-if="serviceHC.data.firstSucceeded" class="text-success">
                             <i class="mdi mdi-check"></i>
-                            Healthy
+                            {{"service_health_healthy" | I18N}}
                         </strong>
                         <strong ng-if="!serviceHC.data.firstSucceeded" class="text-danger">
                             <i class="mdi mdi-alert-outline"></i>
-                            Unhealthy
+                            {{"service_health_unhealthy" | I18N}}
                         </strong>
                     </td>
                 </tr>
                 <tr>
-                    <th>Last checked</th>
+                    <th>{{"service_health_last_checked" | I18N}}</th>
                     <th>{{moment(serviceHC.data.lastChecked).fromNow()}}</th>
                 </tr>
                 <tr>
-                    <th>Last failed</th>
+                    <th>{{"service_health_last_failed" | I18N}}</th>
                     <td>{{serviceHC.data.lastFailed ? moment(serviceHC.data.lastFailed).format("dddd, MMMM Do YYYY, HH:mm:ss") : "Never"}}</td>
                 </tr>
                 <tr>
-                    <th>Last notified</th>
+                    <th>{{"service_health_last_notified" |I18N}}</th>
                     <td>{{serviceHC.data.lastNotified ? moment(serviceHC.data.lastNotified).fromNow() : 'Never'}}</td>
                 </tr>
                 <tr>
                     <th>
                     <span data-ng-if="moment(serviceHC.data.lastSucceeded || 0) > moment(serviceHC.data.lastFailed || 0)">
-                        Uptime
+                        {{"service_health_uptime" | I18N}}
                     </span>
                         <span data-ng-if="moment(serviceHC.data.lastSucceeded || 0) <= moment(serviceHC.data.lastFailed || 0)">
-                        Downtime
+                        {{"service_health_downtime" | I18N}}
                     </span>
                     </th>
                     <td>

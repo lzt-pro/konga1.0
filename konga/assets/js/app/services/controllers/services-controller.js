@@ -4,10 +4,11 @@
   angular.module('frontend.services')
     .controller('ServicesController', [
       '$scope', '$rootScope', '$log', '$state', 'ServiceService', 'ListConfig', 'ServiceModel',
-      'UserService', '$uibModal', 'DialogService',
+      'UserService', '$uibModal', 'DialogService','I18N',
       function controller($scope, $rootScope, $log, $state, ServiceService, ListConfig, ServiceModel,
-                          UserService, $uibModal, DialogService) {
+                          UserService, $uibModal, DialogService, I18N) {
 
+        $scope.name = I18N.T('name');
         ServiceModel.setScope($scope, false, 'items', 'itemCount');
         $scope = angular.extend($scope, angular.copy(ListConfig.getConfig('service', ServiceModel)));
         $scope.user = UserService.user()

@@ -5,10 +5,11 @@
     angular.module('frontend.info', []);
 
     // Module configuration
-    angular.module('frontend.info')
+    angular.module('frontend.info',['pascalprecht.translate'])
         .config([
-            '$stateProvider',
-            function config($stateProvider) {
+            '$stateProvider','$translateProvider',
+            function config($stateProvider, $translateProvider) {
+
                 $stateProvider
                     .state('info', {
                         parent: 'frontend',
@@ -31,6 +32,11 @@
 
                     })
                 ;
+                $translateProvider.useStaticFilesLoader({
+                    prefix:'/js/app/i18n/lan-',
+                    suffix:'.json'
+                });
+                $translateProvider.preferredLanguage('cn');
             }
         ])
     ;
