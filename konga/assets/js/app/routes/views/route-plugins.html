@@ -2,14 +2,14 @@
     <div class="col-md-6 text-left">
         <h4>
             <i class="mdi mdi-plug"></i>
-            Assigned plugins
+            {{"routes_assigned_plugins" |I18N}}
 
         </h4>
     </div>
     <div class="col-md-6 text-right" ng-if="user.hasPermission('plugins','create')">
         <button class="btn btn-primary btn-flat" style="margin-top: 5px" ng-click="onAddPlugin()">
             <i class="mdi mdi-plus"></i>
-            add plugin
+            {{"routes_add_plugin" | I18N}}
         </button>
     </div>
 </div>
@@ -69,13 +69,13 @@
         <td ng-if="user.hasPermission('plugins','delete')">
             <button class="btn btn-link btn-danger" ng-click="deletePlugin(item)">
                 <i class="mdi mdi-delete"></i>
-                delete
+                {{"delete" | I18N}}
             </button>
         </td>
     </tr>
     <tr data-ng-if="plugins.data.length === 0">
         <td colspan="100%" class="text-center text-muted">
-            <em>no data found...</em>
+            <em>{{"no_data" | I18N}}</em>
         </td>
     </tr>
 </table>

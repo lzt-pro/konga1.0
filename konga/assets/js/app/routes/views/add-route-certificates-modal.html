@@ -1,6 +1,6 @@
 <div class="modal-header warning">
     <h4 class="modal-title" id="modal-title">
-        Add Certificates to {{route.name || route.id}}
+        {{"route_add_certificates" | I18N}} {{route.name || route.id}}
         <a  class="modal-close pull-right" ng-click="close()">
             <i class="mdi mdi-close"></i>
         </a>
@@ -19,8 +19,8 @@
     </div>
     <hr>
     <div class="form-group" ng-class="{'has-error' : errors.key}">
-        <label class="control-label">Key</label>
-        <p class="help-block">Upload the certificate .key file</p>
+        <label class="control-label">{{"key" | I18N}}</label>
+        <p class="help-block">{{"route_add_certificates_upload" | I18N}}</p>
         <input type="file"
                ngf-select ng-model="data.key" name="data.value"
         />
@@ -29,7 +29,7 @@
     <hr>
     <div class="form-group" ng-class="{'has-error' : errors.snis}">
         <label class="control-label">Server Name Indications</label>
-        <p class="help-block">A comma separated list of Server Name Indications. ex: <code>ssl-example.com,other-ssl-example.com</code></p>
+        <p class="help-block">{{"route_add_certificates_ex" | I18N}} <code>ssl-example.com,other-ssl-example.com</code></p>
         <input type="text"
                class="form-control"
                ng-model="data.snis" name="data.value"
@@ -41,7 +41,7 @@
         <button type="text"
                 data-ng-disabled="uploading"
                 class="btn btn-primary btn-block" data-ng-click="submitCerts()">
-            Submit Certificates
+            {{"route_submit_cetificates" | I18N}}
         </button>
     </div>
 </div>

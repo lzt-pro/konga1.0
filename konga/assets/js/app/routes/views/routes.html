@@ -4,7 +4,7 @@
             data-ui-sref="services"
             ng-if="user.hasPermission($state.name.split('.')[0],'create')"
             >
-            <small class='text-info'>You can only create routes from a service page</small>
+            <small class='text-info'>{{"routes_text_info" | I18N}}</small>
         </a>
         <list-search
                 class="pull-right"
@@ -89,13 +89,13 @@
                     <td ng-if="user.hasPermission($state.name.split('.')[0],'edit')">
                         <a class="btn btn-warning btn-link" ui-sref="routes.read({ route_id: route.id })" class="btn btn-default btn-link">
                             <i class="mdi mdi-pencil"></i>
-                            edit
+                            {{"edit" | I18N}}
                         </a>
                     </td>
                     <td ng-if="user.hasPermission($state.name.split('.')[0],'delete')">
                         <button type="button" ng-click="deleteItem($index,route)" class="btn btn-danger btn-link">
                             <i class="mdi mdi-delete"></i>
-                            Delete
+                            {{"delete" | I18N}}
                         </button>
                     </td>
                 </tr>

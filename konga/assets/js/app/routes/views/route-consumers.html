@@ -2,9 +2,9 @@
     <div class="col-md-6 text-left">
         <h4 class="no-margin-bottom">
             <i class="mdi mdi-plug"></i>
-            Eligible Consumers
+            {{"route_consumers" | I18N}}
         </h4>
-        <small>List of consumers with access, based on ACLs & Auth plugins</small>
+        <small>{{"route_consumers_acl_auth" | I18N}}</small>
     </div>
     <div class="col-md-6 text-right">
         <list-search
@@ -18,7 +18,7 @@
 <div class="clearfix"></div>
 <konga-loader ng-if="loading && !items.length"></konga-loader>
 <div class="alert alert-info margin-top" ng-if="isOpenService">
-    This route is neither Access Controlled or secured with an Authentication plugin.
+    {{"route_consumers_alert_info"| I18N}}
 </div>
 
 <div class="row" ng-if="!isOpenService && !loading">
@@ -71,19 +71,19 @@
                         <button type="button"
                                 ng-click="deleteItem($index,consumer)" class="btn btn-danger btn-link">
                             <i class="mdi mdi-delete"></i>
-                            Delete
+                            {{"delete" | I18N}}
                         </button>
                     </td>
                 </tr>
 
                 <tr data-ng-if="items.length === 0 && !loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>No data found...</em>
+                        <em>{{"no_data" | I18N}}</em>
                     </td>
                 </tr>
                 <tr data-ng-if="loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>Loading consumers...</em>
+                        <em>{{"route_consumers_load" | I18N}}</em>
                     </td>
                 </tr>
             </table>

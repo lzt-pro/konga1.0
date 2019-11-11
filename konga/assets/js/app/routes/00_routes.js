@@ -7,10 +7,15 @@
   ]);
 
   // Module configuration
-  angular.module('frontend.routes')
+  angular.module('frontend.routes',['pascalprecht.translate'])
     .config([
-      '$stateProvider',
-      function config($stateProvider) {
+      '$stateProvider','$translateProvider',
+      function config($stateProvider, $translateProvider) {
+          $translateProvider.useStaticFilesLoader({
+              prefix:'/js/app/i18n/lan-',
+              suffix:'.json'
+          });
+          $translateProvider.preferredLanguage('cn');
         $stateProvider
           .state('routes', {
             parent: 'frontend',

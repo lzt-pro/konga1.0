@@ -8,10 +8,10 @@
 
   angular.module('frontend.consumers')
     .controller('ConsumerController', [
-      '_', '$scope', '$log', '$state', '_consumer', '$rootScope', 'Semver',
-      function controller(_, $scope, $log, $state, _consumer, $rootScope, Semver) {
+      '_', '$scope', '$log', '$state', '_consumer', '$rootScope', 'Semver','I18N',
+      function controller(_, $scope, $log, $state, _consumer, $rootScope, Semver, I18N) {
 
-
+        $scope.name = I18N.T('name');
         $scope.consumer = _consumer.data
         $state.current.data.pageName = "CONSUMER: " + ($scope.consumer.username || $scope.consumer.id)
         $scope.activeSection = 0;

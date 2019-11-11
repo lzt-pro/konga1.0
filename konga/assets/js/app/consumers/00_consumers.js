@@ -8,10 +8,15 @@
   ]);
 
   // Module configuration
-  angular.module('frontend.consumers')
+  angular.module('frontend.consumers',['pascalprecht.translate'])
     .config([
-      '$stateProvider',
-      function config($stateProvider) {
+      '$stateProvider','$translateProvider',
+      function config($stateProvider, $translateProvider) {
+        $translateProvider.useStaticFilesLoader({
+          prefix:'/js/app/i18n/lan-',
+          suffix:'.json'
+        });
+        $translateProvider.preferredLanguage('cn');
         $stateProvider
           .state('consumers', {
             parent: 'frontend',
