@@ -4,15 +4,11 @@
   angular.module('frontend.plugins', []);
 
   // Module configuration
-  angular.module('frontend.plugins',['pascalprecht.translate'])
+  angular.module('frontend.plugins')
     .config([
-      '$stateProvider','$translateProvider',
-      function config($stateProvider,$translateProvider) {
-        $translateProvider.useStaticFilesLoader({
-          prefix:'/js/app/i18n/lan-',
-          suffix:'.json'
-        });
-        $translateProvider.preferredLanguage('cn');
+      '$stateProvider',
+      function config($stateProvider) {
+
         $stateProvider
           .state('plugins', {
             parent: 'frontend',
@@ -37,7 +33,7 @@
               api: {}
             },
             data: {
-              pageName: "Add Global Plugins",
+              pageName: "Add_Global_Plugins",
               pageDescription: null,
               displayName: "add"
             },

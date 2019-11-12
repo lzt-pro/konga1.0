@@ -7,15 +7,10 @@
   ]);
 
   // Module configuration
-  angular.module('frontend.routes',['pascalprecht.translate'])
+  angular.module('frontend.routes')
     .config([
-      '$stateProvider','$translateProvider',
-      function config($stateProvider, $translateProvider) {
-          $translateProvider.useStaticFilesLoader({
-              prefix:'/js/app/i18n/lan-',
-              suffix:'.json'
-          });
-          $translateProvider.preferredLanguage('cn');
+      '$stateProvider',
+      function config($stateProvider) {
         $stateProvider
           .state('routes', {
             parent: 'frontend',
@@ -23,8 +18,7 @@
             data: {
               activeNode: true,
               pageName: "Routes",
-              pageDescription: "" +
-              "The Route entities defines rules to match client requests. Each Route is associated with a Service, and a Service may have multiple Routes associated to it. Every request matching a given Route will be proxied to its associated Service.",
+              pageDescription: "Routes_detail",
               //displayName : "routes",
               prefix: '<i class="material-icons">cloud_queue</i>'
             },

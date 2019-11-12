@@ -6,15 +6,10 @@
     ]);
 
     // Module configuration
-    angular.module('frontend.connections',['pascalprecht.translate'])
+    angular.module('frontend.connections')
         .config([
-            '$stateProvider','$translateProvider',
-            function config($stateProvider,$translateProvider) {
-                $translateProvider.useStaticFilesLoader({
-                    prefix:'/js/app/i18n/lan-',
-                    suffix:'.json'
-                });
-                $translateProvider.preferredLanguage('cn');
+            '$stateProvider',
+            function config($stateProvider) {
                 $stateProvider
                     .state('connections', {
                         url: '/connections',
@@ -22,7 +17,7 @@
                         data : {
                             access : 0,
                             pageName : "Connections",
-                            pageDescription : "Create connections to Kong Nodes and activate the one you want use.",
+                            pageDescription : "Connections_detail",
                             prefix : '<i class="mdi mdi-cast-connected"></i>'
                         },
                         views: {

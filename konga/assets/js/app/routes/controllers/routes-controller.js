@@ -4,10 +4,9 @@
   angular.module('frontend.routes')
     .controller('RoutesController', [
       '$scope', '$rootScope', '$log', '$state', 'RoutesService', 'ListConfig', 'RouteModel',
-      'UserService', '$uibModal', '_services','I18N',
+      'UserService', '$uibModal', '_services',
       function controller($scope, $rootScope, $log, $state, RoutesService, ListConfig, RouteModel,
-                          UserService, $uibModal, _services, I18N) {
-        $scope.name = I18N.T('name');
+                          UserService, $uibModal, _services) {
         $scope.services = _services.data;
         RouteModel.setScope($scope, false, 'items', 'itemCount');
         $scope = angular.extend($scope, angular.copy(ListConfig.getConfig('route', RouteModel)));

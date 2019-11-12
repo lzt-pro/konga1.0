@@ -4,15 +4,10 @@
   angular.module('frontend.healthchecks', []);
 
   // Module configuration
-  angular.module('frontend.healthchecks',['pascalprecht.translate'])
+  angular.module('frontend.healthchecks')
     .config([
-      '$stateProvider','$translateProvider',
-      function config($stateProvider,$translateProvider) {
-          $translateProvider.useStaticFilesLoader({
-              prefix:'/js/app/i18n/lan-',
-              suffix:'.json'
-          });
-          $translateProvider.preferredLanguage('cn');
+      '$stateProvider',
+      function config($stateProvider) {
         $stateProvider
           .state('healthchecks', {
             parent: 'frontend',

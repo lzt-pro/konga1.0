@@ -6,15 +6,10 @@
     ]);
 
     // Module configuration
-    angular.module('frontend.users',['pascalprecht.translate'])
+    angular.module('frontend.users')
         .config([
-            '$stateProvider','$translateProvider',
-            function config($stateProvider,$translateProvider) {
-                $translateProvider.useStaticFilesLoader({
-                    prefix:'/js/app/i18n/lan-',
-                    suffix:'.json'
-                });
-                $translateProvider.preferredLanguage('cn');
+            '$stateProvider',
+            function config($stateProvider) {
                 $stateProvider
                     .state('users', {
                         url: '/users',
@@ -23,7 +18,7 @@
                         data : {
                             pageName : "Users",
                             //displayName : "konga users",
-                            pageDescription : "Manage Konga users and user roles"
+                            pageDescription : "Users_detail"
                         },
                         views: {
                             'content@': {

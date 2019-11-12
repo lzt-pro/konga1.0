@@ -5,15 +5,10 @@
     angular.module('frontend.certificates', []);
 
     // Module configuration
-    angular.module('frontend.certificates',['pascalprecht.translate'])
+    angular.module('frontend.certificates')
         .config([
-            '$stateProvider','$translateProvider',
-            function config($stateProvider,$translateProvider) {
-                $translateProvider.useStaticFilesLoader({
-                    prefix:'/js/app/i18n/lan-',
-                    suffix:'.json'
-                });
-                $translateProvider.preferredLanguage('cn');
+            '$stateProvider',
+            function config($stateProvider) {
                 $stateProvider
                     .state('certificates', {
                         parent : 'frontend',
@@ -21,7 +16,7 @@
                         data : {
                             activeNode : true,
                             pageName : "Certificates",
-                            pageDescription : "A certificate object represents a public certificate/private key pair for an SSL certificate. These objects are used by Kong to handle SSL/TLS termination for encrypted requests. Certificates are optionally associated with SNI objects to tie a cert/key pair to one or more hostnames.",
+                            pageDescription : "Certificates_detail",
                             //displayName : "certificates",
                             prefix : '<i class="material-icons text-primary">perm_identity</i>'
                         },

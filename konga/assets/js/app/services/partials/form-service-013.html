@@ -12,7 +12,7 @@
     <label class="col-sm-4 control-label">{{"service_form_description" | I18N}} <br><em><small class="help-block">{{"service_form_optional" | I18N}}</small></em></label>
     <div class="col-sm-7">
         <input ng-model="service.extras.description" class="form-control">
-        <p class="help-block">An optional service description.</p>
+        <p class="help-block">{{"last_1" | I18N}}</p>
     </div>
 </div>
 <div class="form-group">
@@ -124,7 +124,7 @@
     <div class="col-sm-7">
         <input type="number" ng-model="service.write_timeout" class="form-control">
         <div class="text-danger" ng-if="errors.write_timeout" data-ng-bind="errors.write_timeout"></div>
-        <p class="help-block">{{"service_form_write_timeout_default"}} <code>60000</code></p>
+        <p class="help-block">{{"service_form_write_timeout_default" | I18N}} <code>60000</code></p>
     </div>
 </div>
 <div class="form-group" ng-class="{'has-error' : errors.read_timeout}">

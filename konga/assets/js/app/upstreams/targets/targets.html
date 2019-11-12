@@ -35,11 +35,11 @@
                                 class="clickable"
                                 data-ng-show="item.column"
                                 data-ng-click="changeSort(item)"
-                                data-ng-bind-html="item.title.toUpperCase()"
+                                data-ng-bind-html="item.title.toUpperCase() | I18N"
                         ></a>
             <span
                     data-ng-show="!item.column"
-                    data-ng-bind-html="item.title.toUpperCase()"
+                    data-ng-bind-html="item.title.toUpperCase() | I18N"
             ></span>
                         <input data-ng-if="item.checkbox" type="checkbox" data-ng-model="globalCheck.isAllChecked"/>
                         <i class="mdi"

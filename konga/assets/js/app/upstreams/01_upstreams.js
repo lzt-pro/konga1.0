@@ -6,15 +6,10 @@
     ]);
 
     // Module configuration
-    angular.module('frontend.upstreams', ['pascalprecht.translate'])
+    angular.module('frontend.upstreams')
         .config([
-            '$stateProvider','$translateProvider',
-            function config($stateProvider, $translateProvider) {
-                $translateProvider.useStaticFilesLoader({
-                    prefix:'/js/app/i18n/lan-',
-                    suffix:'.json'
-                });
-                $translateProvider.preferredLanguage('cn');
+            '$stateProvider',
+            function config($stateProvider) {
                 $stateProvider
                     .state('upstreams', {
                         parent : 'frontend',
@@ -22,8 +17,9 @@
                         data : {
                             activeNode : true,
                             pageName : "Upstreams",
-                            pageDescription : "The upstream object represents a virtual hostname and can be used to loadbalance incoming requests over multiple services (targets). So for example an upstream named <code>service.v1.xyz</code> with an API object created with an <code>upstream_url=https://service.v1.xyz/some/path</code>. Requests for this API would be proxied to the targets defined within the upstream.",
+                            pageDescription : " Upstreams_detail",
                             //displayName : "upstreams",
+                            // <code>service.v1.xyz</code> with an API object created with an <code>upstream_url=https://service.v1.xyz/some/path</code>. Requests for this API would be proxied to the targets defined within the upstream.
                             prefix : '<i class="material-icons">&#xE8F2;</i>'
                         },
                         views: {

@@ -4,10 +4,9 @@
   angular.module('frontend.plugins')
     .controller('PluginsController', [
       '_', '$scope', '$log', '$state', 'ApiService', 'PluginsService', 'MessageService',
-      '$uibModal', 'DialogService', 'PluginModel', 'ListConfig', 'UserService','I18N',
+      '$uibModal', 'DialogService', 'PluginModel', 'ListConfig', 'UserService',
       function controller(_, $scope, $log, $state, ApiService, PluginsService, MessageService,
-                          $uibModal, DialogService, PluginModel, ListConfig, UserService, I18N) {
-        $scope.name = I18N.T('name');
+                          $uibModal, DialogService, PluginModel, ListConfig, UserService) {
         PluginModel.setScope($scope, false, 'items', 'itemCount');
         $scope = angular.extend($scope, angular.copy(ListConfig.getConfig('plugin', PluginModel)));
         $scope.user = UserService.user();

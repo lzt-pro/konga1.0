@@ -4,15 +4,10 @@
   angular.module('frontend.settings', []);
 
   // Module configuration
-  angular.module('frontend.settings',['pascalprecht.translate'])
+  angular.module('frontend.settings')
     .config([
-      '$stateProvider','$translateProvider',
-      function config($stateProvider,$translateProvider) {
-          $translateProvider.useStaticFilesLoader({
-              prefix:'/js/app/i18n/lan-',
-              suffix:'.json'
-          });
-          $translateProvider.preferredLanguage('cn');
+      '$stateProvider',
+      function config($stateProvider) {
         $stateProvider
           .state('settings', {
             url: '/settings',

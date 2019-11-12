@@ -9,10 +9,10 @@
   angular.module('frontend.healthchecks')
     .controller('HealthChecksController', [
       '$scope', '$rootScope', '$log', '$state', 'ApiService', '$uibModal', 'DialogService', 'UserService', '$q', '$ngBootbox',
-      'MessageService', 'SocketHelperService', '$http', 'Semver', '$timeout', 'ApiHealthCheck', 'ListConfig','I18N',
+      'MessageService', 'SocketHelperService', '$http', 'Semver', '$timeout', 'ApiHealthCheck', 'ListConfig',
       function controller($scope, $rootScope, $log, $state, ApiService, $uibModal, DialogService, UserService, $q, $ngBootbox,
-                          MessageService, SocketHelperService, $http, Semver, $timeout, ApiHealthCheck, ListConfig, I18N) {
-        $scope.name = I18N.T('name');
+                          MessageService, SocketHelperService, $http, Semver, $timeout, ApiHealthCheck, ListConfig,) {
+
         ApiHealthCheck.setScope($scope, false, 'items', 'itemCount');
 
         // Add default list configuration variable to current scope

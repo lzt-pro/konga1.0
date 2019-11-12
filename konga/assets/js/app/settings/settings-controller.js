@@ -9,12 +9,10 @@
   angular.module('frontend.settings')
     .controller('SettingsController', [
       '_', '$scope', '$rootScope', '$log', 'EmailTransport',
-      'Settings', 'MessageService', '$uibModal', '_integrations','I18N',
+      'Settings', 'MessageService', '$uibModal', '_integrations',
       function controller(_, $scope, $rootScope, $log, EmailTransport,
-                          Settings, MessageService, $uibModal, _integrations,I18N) {
+                          Settings, MessageService, $uibModal, _integrations) {
 
-
-        $scope.name = I18N.T('name');
         if(_integrations.data && _integrations.data.length) {
           $rootScope.integrations = _integrations.data;
         }

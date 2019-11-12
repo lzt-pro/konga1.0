@@ -5,15 +5,10 @@
     angular.module('frontend.cluster', []);
 
     // Module configuration
-    angular.module('frontend.cluster',['pascalprecht.translate'])
+    angular.module('frontend.cluster')
         .config([
-            '$stateProvider','$translateProvider',
-            function config($stateProvider,$translateProvider) {
-                $translateProvider.useStaticFilesLoader({
-                    prefix:'/js/app/i18n/lan-',
-                    suffix:'.json'
-                });
-                $translateProvider.preferredLanguage('cn');
+            '$stateProvider',
+            function config($stateProvider) {
                 $stateProvider
                     .state('cluster', {
                         parent: 'frontend',

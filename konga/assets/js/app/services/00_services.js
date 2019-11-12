@@ -7,15 +7,10 @@
   ]);
 
   // Module configuration
-  angular.module('frontend.services',['pascalprecht.translate'])
+  angular.module('frontend.services')
     .config([
-      '$stateProvider','$translateProvider',
-      function config($stateProvider, $translateProvider) {
-        $translateProvider.useStaticFilesLoader({
-          prefix:'/js/app/i18n/lan-',
-          suffix:'.json'
-        });
-        $translateProvider.preferredLanguage('cn');
+      '$stateProvider',
+      function config($stateProvider) {
         $stateProvider
           .state('services', {
             parent: 'frontend',
@@ -23,7 +18,7 @@
             data: {
               activeNode: true,
               pageName: "Services",
-              pageDescription: "Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc.",
+              pageDescription: "Services_detail",
               //displayName : "services",
               prefix: '<i class="material-icons">cloud_queue</i>'
             },

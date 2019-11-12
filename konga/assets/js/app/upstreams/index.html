@@ -3,7 +3,7 @@
         <div class="pull-left">
             <button ng-if="user.hasPermission($state.name.split('.')[0],'create')" class="btn btn-success" ng-click="openCreateItemModal()">
                 <i class="mdi mdi-plus"></i>
-                create_upstream
+                {{"create_upstream" | I18N}}
             </button>
             <button class="btn btn-link btn-danger" ng-click="openAlertsListModal()">
                 <i class="mdi mdi-bell-outline"></i>&nbsp;
@@ -33,11 +33,11 @@
                                 class="clickable"
                                 data-ng-show="item.column"
                                 data-ng-click="changeSort(item)"
-                                data-ng-bind-html="item.title.toUpperCase()"
+                                data-ng-bind-html="item.title.toUpperCase() | I18N"
                         ></a>
                         <span
                                 data-ng-show="!item.column"
-                                data-ng-bind-html="item.title.toUpperCase()"
+                                data-ng-bind-html="item.title.toUpperCase() | I18N"
                         ></span>
                         <input data-ng-if="item.checkbox" type="checkbox" data-ng-model="globalCheck.isAllChecked"/>
                         <i class="mdi"
