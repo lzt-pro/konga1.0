@@ -477,6 +477,23 @@
   "Password_Confirmation": "Password Confirmation",
   "last_update": "Last update",
   "submit_user": "Submit User",
-  "plugin_js_help_1": "A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response workflow, and it's how you can add functionalities to APIs that run behind Kong, like Authentication or Rate Limiting for example."
+  "plugin_js_help_1": "A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response workflow, and it's how you can add functionalities to APIs that run behind Kong, like Authentication or Rate Limiting for example.",
+  "DASHBOARD": "DASHBOARD",
+  "INFO": "INFO",
+  "SERVICES": "SERVICES",
+  "ROUTES": "ROUTES",
+  "CONSUMERS": "CONSUMERS",
+  "PLUGINS": "PLUGINS",
+  "UPSTREAMS": "UPSTREAMS",
+  "CERTIFICATES": "CERTIFICATES",
+  "APPLICATION": "APPLICATION",
+  "USERS": "USERS",
+  "CONNECTIONS": "CONNECTIONS",
+  "SNAPSHOTS": "SNAPSHOTS",
+  "SETTINGS": "SETTINGS",
+  "API GATEWAY": "API GATEWAY",
+  "Node_Info": "Node Info",
+  "Node_Info_detail": "Generic details about the node"
+
 
 }

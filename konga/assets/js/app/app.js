@@ -27,6 +27,7 @@
     'frontend.healthchecks',
     'frontend.services',
     'frontend.routes',
+    'pascalprecht.translate'
   ]);
 
 
@@ -80,11 +81,16 @@
       '$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', '$sailsSocketProvider',
       'cfpLoadingBarProvider',
       'toastrConfig',
-      'AccessLevels',
+      'AccessLevels','$translateProvider',
       function config($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, $sailsSocketProvider,
                       cfpLoadingBarProvider,
                       toastrConfig,
-                      AccessLevels) {
+                      AccessLevels,$translateProvider) {
+        $translateProvider.useStaticFilesLoader({
+          prefix:'/js/app/i18n/lan-',
+          suffix:'.json'
+        });
+        $translateProvider.preferredLanguage('cn');
         $httpProvider.defaults.useXDomain = true;
 
         delete $httpProvider.defaults.headers.common['X-Requested-With'];

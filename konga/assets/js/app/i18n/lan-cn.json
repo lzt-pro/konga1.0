@@ -515,6 +515,22 @@
   "Password_Confirmation": "确认密码",
   "last_update": "名",
   "submit_user": "提交用户",
-  "plugin_js_help_1": "插件实体表示将在HTTP请求/响应工作流期间执行的插件配置，以及如何向在Kong之后运行的api添加功能，例如身份验证或速率限制。"
+  "plugin_js_help_1": "插件实体表示将在HTTP请求/响应工作流期间执行的插件配置，以及如何向在Kong之后运行的api添加功能，例如身份验证或速率限制。",
+  "DASHBOARD": "控制台",
+  "INFO": "节点信息",
+  "SERVICES": "服务",
+  "ROUTES": "路由",
+  "CONSUMERS": "消费者",
+  "PLUGINS": "插件",
+  "UPSTREAMS": "上流服务",
+  "CERTIFICATES": "证书",
+  "APPLICATION": "应用",
+  "USERS": "用户",
+  "CONNECTIONS": "连接",
+  "SNAPSHOTS": "简要说明",
+  "SETTINGS": "设置",
+  "API GATEWAY": "API 网关",
+  "Node_Info": "节点信息",
+  "Node_Info_detail": "有关节点的常规详细信息"
 
 }

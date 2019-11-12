@@ -5,10 +5,10 @@
     angular.module('frontend.info', []);
 
     // Module configuration
-    angular.module('frontend.info',['pascalprecht.translate'])
+    angular.module('frontend.info')
         .config([
-            '$stateProvider','$translateProvider',
-            function config($stateProvider, $translateProvider) {
+            '$stateProvider',
+            function config($stateProvider) {
 
                 $stateProvider
                     .state('info', {
@@ -16,10 +16,10 @@
                         url: '/info',
                         data : {
                             activeNode : true,
-                            pageName : "Node Info",
+                            pageName : "Node_Info",
                             access: 2, // Only admins can access this route
                             // displayName : "node info",
-                            pageDescription : "Generic details about the node",
+                            pageDescription : "Node_Info_detail",
                             prefix : '<i class="material-icons text-primary">&#xE88F;</i>'
                         },
 
@@ -32,11 +32,6 @@
 
                     })
                 ;
-                $translateProvider.useStaticFilesLoader({
-                    prefix:'/js/app/i18n/lan-',
-                    suffix:'.json'
-                });
-                $translateProvider.preferredLanguage('cn');
             }
         ])
     ;

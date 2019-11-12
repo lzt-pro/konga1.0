@@ -9,9 +9,9 @@
   angular.module('frontend.dashboard')
     .controller('DashboardController', [
       '$scope', '$rootScope','$log', '$state','$q','InfoService','$localStorage','HttpTimeout', '$location',
-        'SettingsService', 'NodeModel','$timeout', 'MessageService','UserModel','UserService','Semver','$http','I18N',
+        'SettingsService', 'NodeModel','$timeout', 'MessageService','UserModel','UserService','Semver','$http',
       function controller($scope,$rootScope, $log, $state,$q,InfoService,$localStorage,HttpTimeout, $location,
-                          SettingsService, NodeModel, $timeout, MessageService, UserModel, UserService, Semver, $http,I18N,) {
+                          SettingsService, NodeModel, $timeout, MessageService, UserModel, UserService, Semver, $http,) {
 
 
           var loadTime = $rootScope.KONGA_CONFIG.info_polling_interval,
@@ -22,8 +22,6 @@
           /*$scope.changeLanguage = function(langKey){
               $translate.use(langKey)
           };*/
-
-          $scope.name = I18N.T('name');
 
           $scope.changeLanguage=function (langKey) {
               $translate.use(langKey);

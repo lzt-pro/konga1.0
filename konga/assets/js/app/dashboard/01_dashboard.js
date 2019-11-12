@@ -8,10 +8,10 @@
 
     // Module configuration
     //路由的配置
-    angular.module('frontend.dashboard',['pascalprecht.translate'])
+    angular.module('frontend.dashboard')
         .config([
-            '$stateProvider','$translateProvider',
-            function config($stateProvider, $translateProvider) {
+            '$stateProvider',
+            function config($stateProvider) {
                 $stateProvider
                     .state('dashboard', {
                         url: '/dashboard',
@@ -33,10 +33,5 @@
                         },
 
                     });
-                $translateProvider.useStaticFilesLoader({
-                    prefix:'/js/app/i18n/lan-',
-                    suffix:'.json'
-                });
-                $translateProvider.preferredLanguage('cn');
         }]);
 }());
