@@ -5,7 +5,7 @@
                     ng-if="user.hasPermission($state.name.split('.')[0],'create')"
                     ng-click="openCreateConsumerModal()">
                 <i class="mdi mdi-plus"></i>
-                Create consumer
+                {{"consumer_create" | I18N}}
             </button>
         </div>
         <list-search
@@ -63,19 +63,19 @@
                         <button type="button"
                                 ng-click="deleteItem($index,consumer)" class="btn btn-danger btn-link">
                             <i class="mdi mdi-delete"></i>
-                            Delete
+                            {{"delete" | I18N}}
                         </button>
                     </td>
                 </tr>
 
                 <tr data-ng-if="items.length === 0 && !loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>No data found...</em>
+                        <em>{{"no_data" | I18N}}</em>
                     </td>
                 </tr>
                 <tr data-ng-if="loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>Loading consumers...</em>
+                        <em>{{"loading_consumer" | I18N}}</em>
                     </td>
                 </tr>
             </table>

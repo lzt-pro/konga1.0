@@ -11,13 +11,13 @@
       '_', '$scope', '$rootScope', '$q', '$log', '$ngBootbox', 'UserModel', '$http',
       'SocketHelperService', 'AuthService', 'UserService', 'SettingsService', 'MessageService',
       '$state', '$uibModal', 'DialogService', 'NodeModel', '$localStorage', 'InfoService',
-      'ListConfig',
+      'ListConfig','I18N',
       function controller(_, $scope, $rootScope, $q, $log, $ngBootbox, UserModel, $http,
                           SocketHelperService, AuthService, UserService, SettingsService, MessageService,
                           $state, $uibModal, DialogService, NodeModel, $localStorage, InfoService,
-                          ListConfig) {
+                          ListConfig,I18N) {
 
-
+        $scope.name = I18N.T('name');
         NodeModel.setScope($scope, false, 'items', 'itemCount');
 
         // Add default list configuration variable to current scope

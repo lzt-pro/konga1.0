@@ -6,13 +6,13 @@
      */
     angular.module('frontend.cluster')
         .controller('ClusterListController', [
-            '$scope','Cluster', 'ListConfig','$state','Semver','$rootScope',
-            function($scope,Cluster,ListConfig, $state, Semver, $rootScope) {
+            '$scope','Cluster', 'ListConfig','$state','Semver','$rootScope','I18N',
+            function($scope,Cluster,ListConfig, $state, Semver, $rootScope,I18N) {
 
                 Cluster.setScope($scope, false, 'items', 'itemCount');
                 $scope = angular.extend($scope, angular.copy(ListConfig.getConfig('cluster.nodes',Cluster)));
 
-
+                $scope.name = I18N.T('name');
                 function _fetchData() {
                     $scope.loading = true;
                     Cluster.load({

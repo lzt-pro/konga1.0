@@ -1,6 +1,6 @@
 <div class="modal-header warning">
     <h5 class="modal-title" id="modal-title">
-        Testing node
+        {{"testing_node" |I18N}}
         <a  data-ng-show="!connecting" class="modal-close pull-right" ng-click="close()">
             <i class="mdi mdi-close"></i>
         </a>
@@ -15,14 +15,14 @@
     </div>
     <div data-ng-show="!connecting">
         <div data-ng-show="connectionSucceeded" class="text-success">
-            <i class="material-icons">done</i> Successfully connected to node!
+            <i class="material-icons">done</i>{{"node_status_help_3" | I18N}}
         </div>
         <div data-ng-show="!connectionSucceeded">
             <span class="text-danger">
                 <i class="material-icons">warning</i>
-                Connection failed!
+                {{"connection_failed" | I18N}}
             </span><br>
-            It seems that the node is not accessible.
+            {{"node_status_help_4" | I18N}}
         </div>
     </div>
 

@@ -9,11 +9,11 @@
   angular.module('frontend.certificates')
     .controller('CertificatesController', [
       '$scope', '$rootScope', '$log', '$state', 'ApiService', '$uibModal', 'DialogService', 'UserService',
-      'MessageService', 'SettingsService', '$http', 'Upload', 'Semver', '$timeout', 'CertificateModel', 'ListConfig',
+      'MessageService', 'SettingsService', '$http', 'Upload', 'Semver', '$timeout', 'CertificateModel', 'ListConfig',I18N,
       function controller($scope, $rootScope, $log, $state, ApiService, $uibModal, DialogService, UserService,
-                          MessageService, SettingsService, $http, Upload, Semver, $timeout, CertificateModel, ListConfig) {
+                          MessageService, SettingsService, $http, Upload, Semver, $timeout, CertificateModel, ListConfig, I18N,) {
 
-
+        $scope.name = I18N.T('name');
         CertificateModel.setScope($scope, false, 'items', 'itemCount');
         $scope = angular.extend($scope, angular.copy(ListConfig.getConfig('certificate', CertificateModel)));
         $scope.user = UserService.user();

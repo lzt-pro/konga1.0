@@ -273,10 +273,11 @@
       }
     ])
     .controller('MainController', ['$log', '$scope', '$rootScope', 'Settings', 'NodeModel', 'Semver',
-      'UserService', 'InfoService', 'AuthService', 'SubscriptionsService', 'NotificationsService',
+      'UserService', 'InfoService', 'AuthService', 'SubscriptionsService', 'NotificationsService','I18N',
       function ($log, $scope, $rootScope, Settings, NodeModel, Semver,
-                UserService, InfoService, AuthService, SubscriptionsService, NotificationsService) {
+                UserService, InfoService, AuthService, SubscriptionsService, NotificationsService, I18N) {
 
+        $scope.name = I18N.T('name');
         $rootScope.user = UserService.user();
         $rootScope.konga_version = window.konga_version
         $log.debug("MainController:User => ", $rootScope.user)

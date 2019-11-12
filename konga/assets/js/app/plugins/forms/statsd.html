@@ -8,10 +8,7 @@
                     class="form-control"
             >
             <p class="help-block">
-                The CONSUMER ID that this plugin configuration will target.
-                This value can only be used if authentication has been enabled
-                so that the system can identify the user making the request.
-                If left blank, the plugin will be applied to all consumers.
+                {{"response_help_1" | I18N}}
             </p>
         </div>
     </div>
@@ -33,7 +30,7 @@
 
     <!-- CONFIG.PORT -->
     <div class="form-group" ng-class="{'has-error' : errors['port']}">
-        <label class="col-sm-2 control-label"><strong>Port</strong></label>
+        <label class="col-sm-2 control-label"><strong>{{"port" | I18N}}</strong></label>
         <div class="col-sm-10">
             <input
                     type="number"
@@ -41,7 +38,7 @@
                     class="form-control"
             >
             <p class="help-block">
-                The port to send data to on the upstream server. By default, statsd uses UDP.
+                {{"response_help_3" | I18N}}
             </p>
         </div>
     </div>
@@ -49,7 +46,7 @@
 
     <!-- CONFIG.PREFIX -->
     <div class="form-group" ng-class="{'has-error' : errors['prefix']}">
-        <label class="col-sm-2 control-label"><strong>Prefix</strong></label>
+        <label class="col-sm-2 control-label"><strong>{{"prefix" |I18N}}</strong></label>
         <div class="col-sm-10">
             <input
                     type="text"
@@ -57,7 +54,7 @@
                     class="form-control"
             >
             <p class="help-block">
-                String to be prefixed to each metric's name.
+                {{"response_help_4" | I18N}}
             </p>
         </div>
     </div>
@@ -74,7 +71,7 @@
                             <option  ng-repeat="item in statsd.metricNames" ng-value="item">{{item}}</option>
                         </select>
                         <p class="help-block">
-                            Name
+                            {{"name" | I18N}}
                         </p>
                     </div>
                 </div>
@@ -83,7 +80,7 @@
                         <option  ng-repeat="item in statsd.statTypes" ng-value="item">{{item}}</option>
                     </select>
                     <p class="help-block">
-                        Stat type
+                        {{"stat_type" | I18N}}
                     </p>
                 </div>
                 <div class="col-md-2">
@@ -93,7 +90,7 @@
                             class="form-control"
                     >
                     <p class="help-block">
-                        Sample rate
+                        {{"sample_rate" | I18N}}
                     </p>
                 </div>
                 <div class="col-md-3">
@@ -101,7 +98,7 @@
                         <option  ng-repeat="item in statsd.consumerIndentifiers" ng-value="item">{{item}}</option>
                     </select>
                     <p class="help-block">
-                        Consumer identifier
+                        {{"consumer_identifier" | I18N}}
                     </p>
                 </div>
                 <div class="col-md-2">
@@ -109,7 +106,7 @@
                          style="margin-top: 15px"
                          ng-click="statsd.removeMetric(data.fields.metrics.value, $index)">
                         <i class="mdi mdi-delete"></i>&nbsp;
-                        remove
+                        {{"remove" | I18N}}
                     </div>
                 </div>
             </div>
@@ -135,7 +132,7 @@
                     data-ng-disabled="busy" class="btn btn-primary btn-block" ng-click="addPlugin()">
                 <i class="mdi mdi-check" ng-if="!busy"></i>
                 <fading-circle-spinner class="spinner spinner-invert pull-left" ng-if="busy"></fading-circle-spinner>
-                add plugin
+                {{"add_plugin" | I18N}}
             </button>
 
             <button type="button"
@@ -143,7 +140,7 @@
                     data-ng-disabled="busy" class="btn btn-primary btn-block" ng-click="updatePlugin()">
                 <i class="mdi mdi-check" ng-if="!busy"></i>
                 <fading-circle-spinner class="spinner spinner-invert pull-left" ng-if="busy"></fading-circle-spinner>
-                submit changes
+                {{"submit_changes" | I18N}}
             </button>
         </div>
     </div>

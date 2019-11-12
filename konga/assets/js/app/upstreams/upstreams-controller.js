@@ -11,14 +11,14 @@
             '_','$scope', '$rootScope','$q','$log','UserModel',
             'SocketHelperService','UserService','SettingsService','MessageService',
             '$state','$uibModal','DialogService','Upstream','$localStorage', 'DataModel',
-            'ListConfig',
+            'ListConfig','I18N',
             function controller(_,$scope, $rootScope,$q,$log,UserModel,
                                 SocketHelperService, UserService,SettingsService, MessageService,
                                 $state, $uibModal,DialogService,Upstream,$localStorage, DataModel,
-                                ListConfig ) {
-
+                                ListConfig,I18N, ) {
 
                 Upstream.setScope($scope, false, 'items', 'itemCount');
+                $scope.name = I18N.T('name');
                 $scope = angular.extend($scope, angular.copy(ListConfig.getConfig('upstream',Upstream)));
                 $scope.user = UserService.user();
 

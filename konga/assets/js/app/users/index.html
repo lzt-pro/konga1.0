@@ -5,7 +5,7 @@
            ng-if="user.hasPermission($state.name.split('.')[0],'create')"
            class="btn btn-primary pull-left">
             <i class="mdi mdi-plus"></i>
-            Create User
+            {{"create_user" | I18N}}
         </a>
         <list-search
                 class="pull-right margin-right"

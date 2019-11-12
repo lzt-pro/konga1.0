@@ -5,7 +5,7 @@
                 ng-if="user.hasPermission($state.name.split('.')[0],'create')"
                 ng-click="openUploadCertsModal()">
                 <i class="mdi mdi-plus"></i>
-                Add Certificate
+                {{"add_certificate" | I18N}}
             </a>
         </div>
         <list-search
@@ -76,12 +76,12 @@
                 </tr>
                 <tr data-ng-if="(items.data == {} || !items.data.length) && !loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>No data found...</em>
+                        <em>{{"no_data" | I18N}}</em>
                     </td>
                 </tr>
                 <tr data-ng-if="loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>Loading items...</em>
+                        <em>{{"loading_items" | I18N}}</em>
                     </td>
                 </tr>
             </table>

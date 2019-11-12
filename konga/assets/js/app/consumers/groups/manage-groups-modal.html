@@ -1,13 +1,13 @@
 <div class="modal-header success">
     <h4 class="modal-title" id="modal-title">
-        Manage Groups
+        {{"manage_group" | I18N}}
         <a  class="modal-close pull-right" ng-click="close()">
             <i class="mdi mdi-close"></i>
         </a>
     </h4>
 </div>
 <div class="col-md-12 bg-light-grey padding">
-    <p class="text-muted no-margin">Manage consumer groups to use with <code>ACL</code> plugin</p>
+    <p class="text-muted no-margin">{{"manage_group_help_1" |I18N}} <code>ACL</code> {{"plugin" | I18N}}</p>
 </div>
 <div class="modal-body" id="modal-body">
     <div class="actions clearfix" ng-if="groups && groups.length">
@@ -22,15 +22,15 @@
 
         <button class="btn btn-primary pull-right" data-ng-click="openCreateGroupModal()">
             <i class="mdi mdi-plus"></i>
-            Create group
+            {{"create_group" |I18N}}
         </button>
     </div>
     <div  class="text-center" ng-if="groups && !groups.length">
         <br>
         <i class="material-icons large">info_outline</i><br>
-        <p>You have not created any ACL Groups yet.</p>
+        <p>{{"create_group_help_1" | I18N}}</p>
         <a data-ng-click="openCreateGroupModal()" class="btn warning btn-link">
-            Create a group
+            {{"create_a_group" |I18N}}
         </a>
         <br>
         <br>
@@ -40,7 +40,7 @@
             <tr>
                 <th width="1">#</th>
                 <th>Name</th>
-                <th width="1">Created</th>
+                <th width="1">{{"created" | I18N}}</th>
                 <th width="1"></th>
             </tr>
             <tr data-ng-repeat="group in groups | orderBy:'createdAt':true | filter: search.value">
@@ -53,7 +53,7 @@
                 <td>
                     <button class="btn btn-danger btn-link" data-ng-click="deleteGroup(group)">
                         <i class="mdi mdi-delete"></i>
-                        Delete
+                        {{"delete" | I18N}}
                     </button>
                 </td>
             </tr>

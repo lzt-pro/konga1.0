@@ -1,6 +1,6 @@
 <button class="btn  btn-primary margin-bottom" ng-click="onAddPlugin()">
     <i class="mdi mdi-plus"></i>
-    add new plugin
+    {{"add_new_plugin" | I18N}}
 </button>
 <div class="col-md-12 bg-light-grey padding">
     <div class="input-group col-sm-4 pull-left">
@@ -16,10 +16,10 @@
         <th width="1"></th>
         <th width="1"></th>
         <th width="1"></th>
-        <th>Name</th>
-        <th>Scope</th>
-        <th>Apply to</th>
-        <th>Created</th>
+        <th>{{"name" |I18N}}</th>
+        <th>{{"Scope" | I18N}}</th>
+        <th>{{"apply_to" | I18N}}</th>
+        <th>{{"created" | I18N}}</th>
         <th width="1"></th>
     </tr>
     <tr
@@ -82,20 +82,20 @@
             </div>
 
 
-            <span data-ng-if="!item.api.id && !item.service.id && !item.route.id" > All Entrypoints </span>
+            <span data-ng-if="!item.api.id && !item.service.id && !item.route.id" > {{"all_entrypoints" |I18N}} </span>
         </td>
         <td>{{item.created_at * 1000 | date : format : timezone}}</td>
 
         <td>
             <button class="btn btn-link btn-danger" ng-click="deletePlugin(item)">
                 <i class="mdi mdi-delete"></i>
-                delete
+                {{"delete" | I18N}}
             </button>
         </td>
     </tr>
     <tr data-ng-if="plugins.data.length === 0">
         <td colspan="100%" class="text-center text-muted">
-            <em>no data found...</em>
+            <em>{{"no_data" | I18N}}</em>
         </td>
     </tr>
 </table>

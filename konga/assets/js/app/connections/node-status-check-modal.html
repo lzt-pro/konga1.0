@@ -1,7 +1,7 @@
 <div class="modal-header primary">
     <h5 class="modal-title" id="modal-title">
         <i class="mdi mdi-heart-outline"></i>
-        Health Checks
+        {{"health_checks" | I18N}}
         <a class="modal-close pull-right" ng-click="close()">
             <i class="mdi mdi-close"></i>
         </a>
@@ -31,18 +31,16 @@
     <div data-ng-show="!node.health_check_details">
         <p class="lead no-margin">No information available...</p>
         <p class="help-block" ng-if="!node.health_checks">
-            You need to enable health checks for this node
-            in order to start getting status information.
+            {{"node_status_help_1" | I18N}}
         </p>
         <p class="help-block" ng-if="node.health_checks">
-            Try again later...
+            {{"try_again_later" | I18N}}
         </p>
     </div>
     <p class="help-block" ng-if="node.health_checks">
         <strong class="text-danger">
-            Tip:</strong> Administrators can also be notified via email
-            when a connection is down or unresponsive
-            by enabling <code>Email Notifications</code> in <code>settings</code>.
+            Tip:</strong> {{"node_status_help_2" |I18N}}
+        <code>{{"email_notifications" | I18N}}</code> {{"in" | I18N}} <code>{{"settings"| I18N}}</code>.
     </p>
 </div>
 

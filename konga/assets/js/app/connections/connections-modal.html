@@ -1,6 +1,6 @@
 <div class="modal-header success">
     <h5 class="modal-title" id="modal-title">
-        Choose connection
+        {{"choose_connection" | I18N}}
         <a  class="modal-close pull-right" ng-click="close()">
             <i class="mdi mdi-close"></i>
         </a>
@@ -13,9 +13,9 @@
 <table class="table table-hover">
     <tr>
         <th width="1"></th>
-        <th>name</th>
-        <th>Kong admin URL</th>
-        <th>Kong version</th>
+        <th>{{"name" | I18N}}</th>
+        <th>{{"kong_admin" | I18N}} URL</th>
+        <th>{{"kong_version" | I18N}}</th>
     </tr>
     <tr data-ng-repeat="connection in connections"
         class="clickable"

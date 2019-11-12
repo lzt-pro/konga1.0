@@ -1,6 +1,6 @@
 <div class="modal-header primary">
     <h5 class="modal-title" id="modal-title">
-        Alert triggers
+        {{"alert_triggers" | I18N}}
         <a  class="modal-close pull-right" ng-click="close()">
             <i class="mdi mdi-close"></i>
         </a>
@@ -83,12 +83,12 @@
 
                     <tr data-ng-if="items.length === 0 && !loading">
                         <td colspan="100%" class="text-center text-muted">
-                            <em>No data found...</em>
+                            <em>{{"no_data" | I18N}}</em>
                         </td>
                     </tr>
                     <tr data-ng-if="loading">
                         <td colspan="100%" class="text-center text-muted">
-                            <em>Loading items...</em>
+                            <em>{{"loading_items" | I18N}}</em>
                         </td>
                     </tr>
                 </table>

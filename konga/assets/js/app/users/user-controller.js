@@ -8,9 +8,10 @@
 
   angular.module('frontend.users')
     .controller('UserController', [
-      '_', '$scope', '$q', '$log', 'UserService', 'MessageService', '$state', 'DialogService', 'UserModel','NodeModel', '_user',
-      function controller(_, $scope, $q, $log, UserService, MessageService, $state, DialogService, UserModel,NodeModel, _user) {
+      '_', '$scope', '$q', '$log', 'UserService', 'MessageService', '$state', 'DialogService', 'UserModel','NodeModel', '_user', 'I18N',
+      function controller(_, $scope, $q, $log, UserService, MessageService, $state, DialogService, UserModel,NodeModel, _user, I18N) {
 
+        $scope.name = I18N.T('name');
         // Set current scope reference to models
         UserModel.setScope($scope, 'user');
 

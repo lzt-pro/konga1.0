@@ -1,5 +1,5 @@
 <div data-ng-show="!user">
-    <h3>Requested user not found</h3>
+    <h3>{{"requested_user_not_found" | I18N}}</h3>
 </div>
 
 <div data-ng-show="user">
@@ -20,14 +20,14 @@
                                 data-ng-disabled="editableForm.$waiting"
                         >
                             <i class="mdi mdi-check"></i>
-                            Save
+                            {{"save" | I18N}}
                         </button>
                         <button type="button" class="btn btn-danger"
                                 data-ng-disabled="editableForm.$waiting"
                                 data-ng-click="cancelEditing()"
                         >
                             <i class="mdi mdi-close"></i>
-                            Cancel
+                            {{"cancel" | I18N}}
                         </button>
                     </div>
                     <div class="pull-right" data-ng-show="!editableForm.$visible ">
@@ -36,7 +36,7 @@
                                 data-uib-tooltip="Toggle edit mode"
                                 class="btn btn-warning">
                             <i class="mdi mdi-pencil"></i>
-                            Edit
+                            {{"edit" | I18N}}
                         </a>
                         <button type="button" class="btn btn-danger"
                                 data-ng-bootbox-title="Delete {{user.username}}"
@@ -44,7 +44,7 @@
 
                                 data-ng-bootbox-buttons="confirmButtonsDelete">
                             <i class="mdi mdi-delete"></i>
-                            Delete
+                            {{"delete" | I18N}}
                         </button>
 
                     </div>
@@ -62,11 +62,11 @@
                     <tr data-ng-show="editableForm.$visible">
                         <th colspan="2" class="bg-light-grey">
                             <i class="mdi mdi-information-outline"></i>
-                            Info
+                            {{"info" | I18N}}
                         </th>
                     </tr>
                     <tr>
-                        <th>Username</th>
+                        <th>{{"Username" | I18N}}</th>
                         <td>
                                     <span
                                             data-editable-text="user.username"
@@ -77,7 +77,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>First Name</th>
+                        <th>{{"first_name" | I18N}}</th>
                         <td>
                                     <span
                                             data-editable-text="user.firstName"
@@ -88,7 +88,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Last Name</th>
+                        <th>{{"last_name" | I18N}}</th>
                         <td>
                                     <span
                                             data-editable-text="user.lastName"
@@ -99,7 +99,7 @@
                         </td>
                     </tr>
                     <tr ng-class="{'danger' : errors.email}">
-                        <th>Email</th>
+                        <th>{{"email" | I18N}}</th>
                         <td>
                                     <span
                                             data-editable-text="user.email"
@@ -113,7 +113,7 @@
                         </td>
                     </tr>
                     <tr ng-if="editableForm.$visible && authUser.admin && user.id !== authUser.id">
-                        <th>Active connection</th>
+                        <th>{{"active_connection" | I18N}}</th>
                         <td>
                             <select name="userConnection" ng-model="user.node" class="form-control">
                                 <option ng-repeat="option in connections" ng-value="option.id">{{option.name}} | {{option.kong_admin_url}}</option>
@@ -160,11 +160,11 @@
                     <tr data-ng-show="editableForm.$visible">
                         <th colspan="2" class="bg-light-grey">
                             <i class="mdi mdi-security"></i>
-                            Security
+                            {{"Security" | I18N}}
                         </th>
                     </tr>
                     <tr data-ng-show="editableForm.$visible" ng-class="{'danger' : errors.password}">
-                        <th>Password</th>
+                        <th>{{"Password" | I18N}}</th>
                         <td>
                                     <span
                                             data-editable-text="user.passports.password"
@@ -177,7 +177,7 @@
                         </td>
                     </tr>
                     <tr data-ng-show="editableForm.$visible" ng-class="{'danger' : errors.password_confirmation}">
-                        <th>Password Confirmation</th>
+                        <th>{{"Password_Confirmation" | I18N}}</th>
                         <td>
                                     <span
                                             data-editable-text="user.password_confirmation"
@@ -194,7 +194,7 @@
                         <td>{{user.createdAt | date : "MMM d, y"}}</td>
                     </tr>
                     <tr data-ng-show="!editableForm.$visible">
-                        <th>Last update</th>
+                        <th>{{"last_update" | I18N}}</th>
                         <td>{{user.updatedAt | date : "MMM d, y"}}</td>
                     </tr>
 

@@ -3,11 +3,11 @@
         <div class="pull-left">
             <button ng-if="user.hasPermission($state.name.split('.')[0],'create')" class="btn btn-success" ng-click="openCreateItemModal()">
                 <i class="mdi mdi-plus"></i>
-                Create upstream
+                create_upstream
             </button>
             <button class="btn btn-link btn-danger" ng-click="openAlertsListModal()">
                 <i class="mdi mdi-bell-outline"></i>&nbsp;
-                Alert triggers&nbsp;
+                {{"alert_triggers" | I18N}}&nbsp;
                 <span class="badge">{{alertsCount}}</span>
             </button>
         </div>
@@ -65,25 +65,25 @@
                     <td ng-if="user.hasPermission('upstreams','edit')">
                         <a class="btn clickable btn-primary btn-link" data-ui-sref="upstreams.edit({id:item.id})">
                             <i class="mdi mdi-information-outline"></i>
-                            details
+                            {{"details" | I18N}}
                         </a>
                     </td>
                     <td ng-if="user.hasPermission('upstreams','delete')">
                         <button type="button" ng-click="deleteItem($index,item)" class="btn btn-danger btn-link">
                             <i class="mdi mdi-delete"></i>
-                            Delete
+                            {{"delete" | I18N}}
                         </button>
                     </td>
                 </tr>
 
                 <tr data-ng-if="items.length === 0 && !loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>No data found...</em>
+                        <em>{{"no_data" | I18N}}</em>
                     </td>
                 </tr>
                 <tr data-ng-if="loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>Loading upstreams...</em>
+                        <em>{{"loading_upstreams" | I18N}}</em>
                     </td>
                 </tr>
             </table>

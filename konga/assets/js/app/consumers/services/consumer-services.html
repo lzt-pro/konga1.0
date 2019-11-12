@@ -21,7 +21,7 @@
                         <p class="help-block">{{item.host}}</p>
                         <div class="btn-group" uib-dropdown is-open="status.isopen" dropdown-append-to-body="true">
                             <button type="button" class="btn btn-primary btn-sm btn-block btn-flat" uib-dropdown-toggle>
-                                MORE... <span class="caret"></span>
+                                {{"more"| I18N}} <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu animated fadeInUpShort go" uib-dropdown-menu role="menu"
                                 aria-labelledby="single-button">
@@ -31,14 +31,14 @@
                                 <li role="menuitem">
                                     <a ui-sref="services.read({ service_id: item.id })">
                                         <i class="mdi mdi-pencil"></i>&nbsp;&nbsp;
-                                        Edit Service
+                                        {{"edit_service" | I18N}}
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </td>
                     <td width="1" class="no-wrap text-small">
-                        Plugins &nbsp;<i class="mdi mdi-arrow-right"></i>
+                        {{"plugins" | I18N}} &nbsp;<i class="mdi mdi-arrow-right"></i>
                     </td>
                     <td>
                         <div class="badge badge-api-plugin"
@@ -74,7 +74,7 @@
                                     <li role="menuitem">
                                         <a href ng-click="deletePlugin(item,_item)">
                                             <i class="mdi mdi-18px mdi-delete clickable"></i>&nbsp;
-                                            Delete
+                                            {{"delete" | I18N}}
                                         </a>
                                     </li>
                                 </ul>
@@ -86,7 +86,7 @@
                                 uib-tooltip="Add a service plugin that only targets this consumer"
                                 ng-click="onAddPlugin(item)">
                             <i class="mdi mdi-18px mdi-plus"
-                            >ADD PLUGIN</i>
+                            >{{"add_plugins" | I18N}}</i>
                         </button>
                     </td>
                     <td width="1" class="no-wrap text-small">
@@ -110,7 +110,7 @@
                                     </p>
                                 </td>
                                 <td width="1" class="no-wrap text-small">
-                                    Plugins &nbsp;<i class="mdi mdi-arrow-right"></i>
+                                    {{"plugins" | I18N}} &nbsp;<i class="mdi mdi-arrow-right"></i>
                                 </td>
                                 <td>
                                     <div class="badge badge-api-plugin"
@@ -139,14 +139,14 @@
                                                 <li role="menuitem">
                                                     <a href ng-click="onEditPlugin(_item)">
                                                         <i class="mdi mdi-18px mdi-pencil clickable"></i>&nbsp;&nbsp;
-                                                        Edit
+                                                        {{"edit" |I18N}}
                                                     </a>
                                                 </li>
 
                                                 <li role="menuitem">
                                                     <a href ng-click="deletePlugin(route,_item)">
                                                         <i class="mdi mdi-18px mdi-delete clickable"></i>&nbsp;
-                                                        Delete
+                                                        {{"delete" |I18N}}
                                                     </a>
                                                 </li>
                                             </ul>
@@ -158,13 +158,13 @@
                                             uib-tooltip="Add a route plugin that only targets this consumer"
                                             ng-click="onAddPlugin(route, 'route')">
                                         <i class="mdi mdi-18px mdi-plus"
-                                        >ADD PLUGIN</i>
+                                        >{{"add_plugins" | I18N}}</i>
                                     </button>
                                 </td>
                                 <td width="1">
                                     <div class="btn-group" uib-dropdown is-open="route.isopen" dropdown-append-to-body="true">
                                         <button type="button" class="btn btn-primary btn-sm btn-block btn-flat" uib-dropdown-toggle>
-                                            MORE... <span class="caret"></span>
+                                            {{"more" | I18N}}} <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu animated fadeInUpShort go" uib-dropdown-menu role="menu"
                                             aria-labelledby="single-button">
@@ -174,7 +174,7 @@
                                             <li role="menuitem">
                                                 <a ui-sref="routes.read({ route_id: route.id })">
                                                     <i class="mdi mdi-pencil"></i>&nbsp;&nbsp;
-                                                    Edit Route
+                                                    {{"edit_route" | I18N}}
                                                 </a>
                                             </li>
 
@@ -190,7 +190,7 @@
                             <span ng-if="!loadingRoutes && !item.routes.length">The service has no routes or they're not accessible by this consumer</span>
                             <span ng-if="loadingRoutes">
                                 <i class="mdi mdi-loading mdi-spin text-primary"></i>&nbsp;
-                                Loading routes...
+                                {{"loading_routes" | I18N}}
                             </span>
                         </p>
                     </td>

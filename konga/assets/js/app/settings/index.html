@@ -4,26 +4,26 @@
         <div class="col-md-12">
             <hr>
             <h3>
-                General settings
+                {{"general_settings" | I18N}}
             </h3>
             <hr>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>
-                            Dashboard refresh interval
+                            {{"dashboard_refresh_interval" | I18N}}
                         </label>
                         <input type="number" class="form-control" data-ng-model="KONGA_CONFIG.info_polling_interval">
-                        <p class="help-block">The interval in milliseconds at which the Dashboard data will refresh. If set to 0, polling will be disabled.</p>
+                        <p class="help-block">{{"index_help_1" | I18N}}</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>
-                            Base URL
+                            {{"base_url" | I18N}}
                         </label>
                         <input type="text" class="form-control" data-ng-model="KONGA_CONFIG.baseUrl" placeholder="ex. http://my-konga.io">
-                        <p class="help-block">Konga uses the <code>baseUrl</code> for generating links (ex. Account activation link). If left blank, the server's <code>ip:port</code> will be used.</p>
+                        <p class="help-block">Konga uses the <code>baseUrl</code> {{"index_help_3" | I18N}} <code>ip:port</code> {{"index_help_4" | I18N}}</p>
                     </div>
                 </div>
 
@@ -37,7 +37,7 @@
         <div class="col-md-12">
             <hr>
             <h3>
-                Sign up restrictions
+                {{"sign_up_restrictions" | I18N}}
             </h3>
             <hr>
             <div class="form-group">
@@ -48,9 +48,9 @@
                                 <input type="checkbox" ng-change="updateKongaSettings()" ng-model="KONGA_CONFIG.signup_enable">
                             </label>
                             <p>
-                                Allow users to sign up.
+                                {{"index_help_5" | I18N}}
                                 <br>
-                                <span class="help-block">If enabled, users will be allowed to sign up.</span>
+                                <span class="help-block">{{"index_help_6" | I18N}}</span>
                             </p>
                         </div>
                     </li>
@@ -60,9 +60,9 @@
                                 <input type="checkbox" ng-change="updateKongaSettings()" ng-model="KONGA_CONFIG.signup_require_activation">
                             </label>
                             <p>
-                                Send activation email.
+                                {{"index_help_7" | I18N}}
                                 <br>
-                                <span class="help-block">If enabled, an activation email will be sent to the user. If not, the user will be activated automatically.</span>
+                                <span class="help-block">{{"index_help_8" | I18N}}</span>
                             </p>
                         </div>
                     </li>
@@ -76,7 +76,7 @@
     <div class="row">
         <div class="col-md-12">
             <hr>
-            <h3>Notifications</h3>
+            <h3>{{"notifications" | I18N}}</h3>
             <hr>
 
 
@@ -84,23 +84,23 @@
             <uib-tabset active="active">
                 <uib-tab index="0">
                     <uib-tab-heading>
-                        EMAIL
+                        {{"email" | I18N}}
                     </uib-tab-heading>
                     <br>
                     <p class="help-block">
-                        Setup Email notifications.
+                        {{"setup_email_notifications" | I18N}}
                     </p>
                     <hr>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Default sender name</label>
+                                <label>{{"default_sender_name" | I18N}}</label>
                                 <input required="required" type="text" class="form-control" data-ng-model="KONGA_CONFIG.email_default_sender_name">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Default sender address</label>
+                                <label>{{"default_sender_address" | I18N}}</label>
                                 <input required="required" type="email" class="form-control" data-ng-model="KONGA_CONFIG.email_default_sender">
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                     <br>
                     <h5>Transports</h5>
                     <p class="help-block">
-                        Configure email transports and select the one to use. You can disable email notifations by disabling all transports.
+                        {{"index_help_9" | I18N}}
                     </p>
                     <div class="row" vertilize-container="">
                         <div class="col-md-4" data-ng-repeat="transport in transports">
@@ -147,13 +147,13 @@
                 </uib-tab>
                 <uib-tab index="1">
                     <uib-tab-heading>
-                        3RD-PARTY INTEGRATIONS
+                        {{"index_help_10" | I18N}}
                     </uib-tab-heading>
                     <br>
                     <div class="row">
                         <div class="col-md-12">
                             <p class="help-block">
-                                Integrate Konga with 3rd party applications.
+                                {{"index_help_11" | I18N}}
                             </p>
                             <hr>
                             <div class="row">
@@ -182,14 +182,14 @@
                                             <!--</label>-->
                                             <!--<input class="form-control" data-ng-model="item.config.slack_webhook_url">-->
                                             <!--</div>-->
-                                            <p class="text-muted">Send notifications to Slack using Webhooks.</p>
+                                            <p class="text-muted">{{"index_help_12" | I18N}}</p>
                                             <button
                                                     type="button"
                                                     ng-click="configureIntegration(item)"
                                                     class="btn btn-block btn-primary btn-inverse btn-flat"
                                             >
                                                 <i class="mdi mdi-settings"></i>
-                                                CONFIGURE
+                                                {{"configure1" | I18N}}
                                             </button>
 
                                         </div>
@@ -205,8 +205,8 @@
             <br>
             <div class="row">
                 <div class="col-md-12">
-                    <h5>Notify Administrators when</h5>
-                    <p class="text-muted">Notifications will be sent to emails and integrated applications.</p>
+                    <h5>{{"notify_administrators_when" | I18N}}</h5>
+                    <p class="text-muted">{{"notify_administrators_when" | I18N}}</p>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tr
@@ -238,7 +238,7 @@
         <div class="col-md-12">
             <hr>
             <h3>
-                User permissions
+                {{"user_permissions" | I18N}}
             </h3>
             <hr>
             <div class="row" data-ng-repeat="(context,permissions) in KONGA_CONFIG.user_permissions">

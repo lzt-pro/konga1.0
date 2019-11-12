@@ -6,10 +6,15 @@
     ]);
 
     // Module configuration
-    angular.module('frontend.users')
+    angular.module('frontend.users',['pascalprecht.translate'])
         .config([
-            '$stateProvider',
-            function config($stateProvider) {
+            '$stateProvider','$translateProvider',
+            function config($stateProvider,$translateProvider) {
+                $translateProvider.useStaticFilesLoader({
+                    prefix:'/js/app/i18n/lan-',
+                    suffix:'.json'
+                });
+                $translateProvider.preferredLanguage('cn');
                 $stateProvider
                     .state('users', {
                         url: '/users',

@@ -3,13 +3,13 @@
     <uib-tabset active="active" type="pills">
         <uib-tab index="0" ng-click="node.type='default'">
             <uib-tab-heading>
-                DEFAULT
+                {{"default"|I18N}}
             </uib-tab-heading>
             <br>
             <div class="alert alert-info text-small">
-                Konga will connect directly to Kong's admin API.<br>
-                This method is mainly suitable for demo scenarios or internal access (ex. localhost).<br>
-                Kong's admin API <strong class="text-danger">should not</strong> be publicly exposed.
+                {{"create_connection_form" | I18N}}<br>
+                {{"create_connection_help_2" | I18N}}<br>
+                {{"create_connection_help_3" |I18N}} <strong class="text-danger">{{"should_not" | I18N}}</strong> {{"create_connection_help_4" |I18N}}
             </div>
 
         </uib-tab>
@@ -19,25 +19,25 @@
             </uib-tab-heading>
             <br>
             <div class="alert alert-info text-small">
-                Konga will connect to Kong's admin via an exposed "loop-back" API using key authentication.<br>
-                <a href="https://getkong.org/docs/latest/secure-admin-api/#kong-api-loopback" target="_blank">Check out how to setup an API key based "loop-back" API</a>.
+                {{"create_connection_help_5" | I18N}}<br>
+                <a href="https://getkong.org/docs/latest/secure-admin-api/#kong-api-loopback" target="_blank">{{"create_connection_help_6" | I18N}}</a>.
             </div>
 
         </uib-tab>
         <uib-tab index="2" ng-click="node.type='jwt'">
             <uib-tab-heading>
-                JWT AUTH
+                {{"jwt_auth" | I18N}}
             </uib-tab-heading>
             <br>
             <div class="alert alert-info text-small">
-                Konga will connect to Kong's admin via an exposed "loop-back" API using JWT authentication.<br>
-                <a href="https://getkong.org/docs/latest/secure-admin-api/#kong-api-loopback" target="_blank">Check out how to setup a JWT based "loop-back" API</a>.
+                {{"create_connection_help_7" | I18N}}<br>
+                <a href="https://getkong.org/docs/latest/secure-admin-api/#kong-api-loopback" target="_blank">{{"create_connection_help_8" |I18N}}</a>.
             </div>
         </uib-tab>
     </uib-tabset>
     <div class="col-md-12">
         <div class="form-group" ng-class="{'has-error' : errors.name}">
-            <label class="control-label">Name <span class="text-danger">*</span></label>
+            <label class="control-label">{{"name" | I18N}} <span class="text-danger">*</span></label>
             <input ng-model="node.name" class="form-control" placeholder="A unique connection name" required="required">
             <div class="text-danger" ng-if="errors.name" data-ng-bind="errors.name"></div>
         </div>
@@ -61,7 +61,7 @@
             </div>
             <div ng-switch-when="jwt">
                 <div class="form-group" ng-class="{'has-error' : errors.jwt_algorithm}">
-                    <label class="control-label">Algorithm</label>
+                    <label class="control-label">{{"algorithm" | I18N}}</label>
                     <select ng-model="node.jwt_algorithm" class="form-control">
                         <option value="HS256">HS256</option>
                         <option value="RS256">RS256</option>
@@ -97,7 +97,7 @@
             <button type="submit" data-ng-disabled="busy" class="btn btn-primary btn-block" ng-click="create()">
                 <i class="mdi mdi-check" ng-if="!busy"></i>
                 <fading-circle-spinner class="spinner spinner-invert pull-left" ng-if="busy"></fading-circle-spinner>
-                {{node.id ? "update" : "create"}} connection
+                {{node.id ? "update" : "create"}} {{"connection" |I18N}}
             </button>
         </div>
     </div>

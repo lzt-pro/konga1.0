@@ -35,7 +35,7 @@
         <td>
             <button type="button" ng-click="deleteItem($index,cluster)" class="btn btn-danger btn-link" data-ng-disabled="cluster.status != 'failed'">
                 <i class="mdi mdi-delete"></i>
-                remove
+                {{"remove" | I18N}}
             </button>
         </td>
     </tr>

@@ -5,10 +5,15 @@
     angular.module('frontend.certificates', []);
 
     // Module configuration
-    angular.module('frontend.certificates')
+    angular.module('frontend.certificates',['pascalprecht.translate'])
         .config([
-            '$stateProvider',
-            function config($stateProvider) {
+            '$stateProvider','$translateProvider',
+            function config($stateProvider,$translateProvider) {
+                $translateProvider.useStaticFilesLoader({
+                    prefix:'/js/app/i18n/lan-',
+                    suffix:'.json'
+                });
+                $translateProvider.preferredLanguage('cn');
                 $stateProvider
                     .state('certificates', {
                         parent : 'frontend',

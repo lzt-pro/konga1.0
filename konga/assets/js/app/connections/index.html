@@ -13,7 +13,7 @@
     <div class="col-md-12 actions">
         <button class="btn btn-primary pull-left" ng-click="createNode()" ng-if="user.admin">
             <i class="mdi mdi-plus"></i>
-            new connection
+            {{"new_connection" | I18N}}
         </button>
         <list-search
                 class="pull-right margin-right"
@@ -107,14 +107,14 @@
                 <td  width="1" data-ng-if="user.hasPermission('connections','delete')">
                     <button class="btn btn-danger btn-link" ng-click="deleteNode(node)">
                         <i class="mdi mdi-delete"></i>
-                        Delete
+                        {{"delete" | I18N}}
                     </button>
                 </td>
             </tr>
 
             <tr data-ng-if="nodes.length === 0">
                 <td colspan="100%" class="text-center">
-                    <h5>No connections found...</h5>
+                    <h5>{{"no_connection" |I18N}}</h5>
                 </td>
             </tr>
         </table>

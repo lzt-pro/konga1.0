@@ -2,26 +2,26 @@
 
 <form class="form-horizontal">
     <div class="form-group" ng-class="{'has-error' : errors.username}">
-        <label class="col-sm-3 control-label">username <br><em><small class="help-block">semi-optional</small></em></label>
+        <label class="col-sm-3 control-label">username <br><em><small class="help-block">{{"semi_optional" |I18N}}</small></em></label>
         <div class="col-sm-6">
             <input ng-model="consumer.username" class="form-control">
             <div class="text-danger" ng-if="errors.username" data-ng-bind="errors.username"></div>
-            <p class="help-block">The username of the consumer. You must send either this field or <code>custom_id</code> with the request.</p>
+            <p class="help-block">{{"consumer_details_help_1"  |I18N}} <code>custom_id</code> {{"consumer_details_help_2" | I18N}}</p>
         </div>
     </div>
 
     <div class="form-group" ng-class="{'has-error' : errors.custom_id}">
-        <label class="col-sm-3 control-label">custom_id <br><em><small class="help-block">semi-optional</small></em></label>
+        <label class="col-sm-3 control-label">custom_id <br><em><small class="help-block">{{"semi_optional" | I18N}}</small></em></label>
         <div class="col-sm-6">
             <input ng-model="consumer.custom_id" class="form-control">
             <div class="text-danger" ng-if="errors.custom_id" data-ng-bind="errors.custom_id"></div>
-            <p class="help-block">Field for storing an existing ID for the consumer, useful for mapping Kong with users in your existing database. You must send either this field or <code>username</code> with the request.</p>
+            <p class="help-block">{{"consumer_details_help_3" | I18N}} <code>username</code> {{"consumer_details_help_2" |I18N}}</p>
         </div>
     </div>
 
     <div class="form-group" ng-if="isGatewayVersionEqOrGreater('1.1.0-rc1')">
         <label class="col-sm-3 control-label">Tags <br><em>
-            <small class="help-block">optional</small>
+            <small class="help-block">{{"optional" | I18N}}</small>
         </em></label>
         <div class="col-sm-6">
             <chips ng-model="consumer.tags">
@@ -36,7 +36,7 @@
                        ng-model="$tag" uib-typeahead="tag for tag in tags | filter:$viewValue | limitTo:10"/>
             </chips>
             <p class="help-block">
-                Optionally add tags to the consumer
+                {{"consumer_details_help_4" |I18N}}
             </p>
         </div>
     </div>
@@ -45,7 +45,7 @@
         <div class="col-sm-offset-3 col-sm-6">
             <button type="button" class="btn btn-primary" ng-click="updateConsumerDetails()">
                 <i class="mdi mdi-check"></i>
-                Submit Changes
+                {{"submit_change" | I18N}}
             </button>
         </div>
     </div>

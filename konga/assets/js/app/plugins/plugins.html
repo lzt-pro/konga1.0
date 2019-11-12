@@ -6,7 +6,7 @@
                ng-if="user.hasPermission($state.name.split('.')[0],'create')"
                class="btn btn-primary">
                 <i class="mdi mdi-plus"></i>
-                Add global plugins
+                {{"add_global_plugins"  |I18N}}
             </a>
         </div>
         <list-search
@@ -89,13 +89,13 @@
                     <td ng-if="user.hasPermission($state.name.split('.')[0],'delete')">
                         <button type="button" ng-click="deleteItem($index,item)" class="btn btn-danger btn-link">
                             <i class="mdi mdi-delete"></i>
-                            Delete
+                            {{"delete" |I18N}}
                         </button>
                     </td>
                 </tr>
                 <tr data-ng-if="items.data.length === 0">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>no data found...</em>
+                        <em>{{"no_data"|I18N}}</em>
                     </td>
                 </tr>
             </table>

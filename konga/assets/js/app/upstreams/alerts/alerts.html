@@ -1,11 +1,11 @@
 <script type="text/ng-template" id="popoverTemplate.html">
     <div style="max-width: 320px">
-        <h5>How does it work?</h5>
+        <h5>{{"How_does_it_work" | I18N}}</h5>
         <p>
-            Behind the scenes, Konga will poll <code>upstreams/{id}/health</code> every minute
-            and trigger an alert if the results contain targets with <code>UNHEALTHY</code> or <code>DNS_ERROR</code> statuses.
+            {{"alert_help_1" | I18N}} <code>upstreams/{id}/health</code> {{"every_minute" | I18N}}
+            {{"alert_help_2" | I18N}} <code>UNHEALTHY</code> or <code>DNS_ERROR</code> {{"statuses" | I18N}}.
             <br><br>
-            Bare in mind that Upstream health checks must be enabled and configured accordingly in the <code>Details</code> tab.
+            {{"alert_help_3" | I18N}} <code>Details</code> {{"tab" | I18N}}.
         </p>
     </div>
 </script>
@@ -31,25 +31,25 @@
     <div class="panel-body">
 
         <div class="alert alert-warning" ng-if="!alert.active">
-            Alerting is disabled. Switch alerts ON to enable them.
+            {{"alert_help_4" | I18N}}
         </div>
 
         <a href="javascript:void(0)"
            uib-popover-template="'popoverTemplate.html'"
            popover-placement="bottom"
            popover-trigger="'outsideClick'"
-        >How does it work?</a>
+        >{{"How_does_it_work" |I18N}}</a>
         <br>
         <br>
 
-        <h4 class="margin-bottom">What should I do when an alert is triggered?</h4>
+        <h4 class="margin-bottom">{{"alert_help_5" | I18N}}</h4>
 
         <table class="table">
             <tr>
                 <td>
-                    <h5>Email administrators</h5>
+                    <h5>{{"email_administrators" | I18N}}</h5>
                     <p class="help-block">
-                        Emails have to be properly set up under <a ui-sref="settings"  class="no-wrap">Settings -> Notifications</a>.
+                        {{"alert_help_6" | I18N}} <a ui-sref="settings"  class="no-wrap">Settings -> Notifications</a>.
                     </p>
                 </td>
                 <td width="1">
@@ -68,9 +68,9 @@
             </tr>
             <tr>
                 <td>
-                    <h5>Send notification to Slack</h5>
+                    <h5>{{"alert_help_7" | I18N}}</h5>
                     <p class="help-block">
-                        Integration with slack has to be properly set up under <a ui-sref="settings" class="no-wrap">Settings -> Notifications</a>.
+                        {{"alert_help_8" | I18N}} <a ui-sref="settings" class="no-wrap">{{"settings" | I18N}} -> {{"notifications" | I18N}}</a>.
                     </p>
                 </td>
                 <td width="1">

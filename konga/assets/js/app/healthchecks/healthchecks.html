@@ -5,7 +5,7 @@
                 ng-if="user.hasPermission($state.name.split('.')[0],'create')"
                 ng-click="openUploadCertsModal()">
                 <i class="mdi mdi-plus"></i>
-                Add Certificate
+                {{"add_certificate"| I18N}}
             </a>
         </div>
         <list-search
@@ -64,7 +64,7 @@
                         <strong>{{item.api.name}}</strong>
                         <p ng-if="item.isOrphaned">
                             <small>
-                                The API does not exist anymore.
+                                {{"health_add_certificates_help_4" | I18N}}
                             </small>
 
                         </p>
@@ -82,18 +82,18 @@
                     <td  width="1" data-ng-if="user.hasPermission('healthchecks','delete')">
                         <button class="btn btn-danger btn-link" ng-click="deleteItem(item)">
                             <i class="mdi mdi-delete"></i>
-                            Delete
+                            {{"delete" | I18N}}
                         </button>
                     </td>
                 </tr>
                 <tr data-ng-if="!items.length && !loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>No data found...</em>
+                        <em>{{"no_data" | I18N}}</em>
                     </td>
                 </tr>
                 <tr data-ng-if="loading">
                     <td colspan="100%" class="text-center text-muted">
-                        <em>Loading items...</em>
+                        <em>{{"loading_items" | I18N}}</em>
                     </td>
                 </tr>
             </table>

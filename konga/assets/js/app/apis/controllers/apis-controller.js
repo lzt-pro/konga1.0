@@ -4,9 +4,9 @@
   angular.module('frontend.apis')
     .controller('ApisController', [
       '$scope', '$rootScope', '$log', '$state', 'ApiService', 'ListConfig', 'ApiModel',
-      'UserService', '$uibModal', 'DialogService', 'ApiHCModel', 'MessageService',
+      'UserService', '$uibModal', 'DialogService', 'ApiHCModel', 'MessageService',I18N,
       function controller($scope, $rootScope, $log, $state, ApiService, ListConfig, ApiModel,
-                          UserService, $uibModal, DialogService, ApiHCModel, MessageService) {
+                          UserService, $uibModal, DialogService, ApiHCModel, MessageService,I18N,) {
 
         ApiModel.setScope($scope, false, 'items', 'itemCount');
         $scope = angular.extend($scope, angular.copy(ListConfig.getConfig('api', ApiModel)));
@@ -17,7 +17,7 @@
         $scope.updateApi = updateApi
         $scope.onDeleteApi = onDeleteApi
         $scope.deleteApiHealthChecks = deleteApiHealthChecks
-
+        $scope.name = I18N.T('name');
 
         /**
          * -----------------------------------------------------------------------------------------------------------
