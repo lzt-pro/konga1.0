@@ -30,11 +30,11 @@
                                 data-ng-show="item.column"
                                 class="clickable"
                                 data-ng-click="changeSort(item)"
-                                data-ng-bind-html="item.title.toUpperCase() I18N"
+                                data-ng-bind-html="item.title.toUpperCase() | I18N"
                         ></a>
             <span
                     data-ng-show="!item.column"
-                    data-ng-bind-html="item.title.toUpperCase() I18N"
+                    data-ng-bind-html="item.title.toUpperCase() |  I18N"
             ></span>
 
                         <i class="mdi"
