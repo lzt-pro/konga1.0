@@ -134,8 +134,6 @@ var self = module.exports = {
         sails.log.error("KongProxyController", "request error", response.body);
         return res.negotiate(response);
       }
-
-
       // Apply after Hooks
       switch(req.method.toLowerCase()) {
         case "get":
@@ -156,8 +154,6 @@ var self = module.exports = {
         default:
           return res.json(response.body)
       }
-
-
     });
   }
 };
