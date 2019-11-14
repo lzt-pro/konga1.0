@@ -18,8 +18,6 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.policies.html
  */
 module.exports.policies = {
-  // Default policy for all controllers and actions
-  '*': ['authenticated'],
 
   AuthController: {
     'checkPassword': ['authenticated'],
@@ -163,6 +161,10 @@ module.exports.policies = {
 
   KongProxyController: {
     "*": ['authenticated', 'dynamicNode']
+  },
+
+  MarketUserController:{
+
   }
 
 

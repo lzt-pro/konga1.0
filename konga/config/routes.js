@@ -159,7 +159,9 @@ module.exports.routes = {
   'POST /kong/*': 'KongProxyController.proxy',
   'PUT /kong/*': 'KongProxyController.proxy',
   'PATCH /kong/*': 'KongProxyController.proxy',
-  'DELETE /kong/*': 'KongProxyController.proxy'
+  'DELETE /kong/*': 'KongProxyController.proxy',
+
+  'POST /api-platform/v1/user':'MarketUserController.register'
 
 
 };
