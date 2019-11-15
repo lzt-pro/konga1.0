@@ -10,6 +10,60 @@ var Utils = require('../services/Utils');
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 var self = module.exports =  {
+
+    friendlyName:"Register User",
+    description:"Register User",
+    inputs:{
+        id:{
+            type:'string',
+            required: true,
+        },
+        email:{
+            type:'string',
+            required: true,
+        },
+        phone:{
+            type:'string',
+            required: false
+        },
+        idcard:{
+            type:'string',
+            required: false,
+        },
+        password:{
+            type:'string',
+            required:true,
+        }
+    },
+    exits:{
+        created:{
+            responseType: 'created'
+        },
+        notFound: {
+            responseType: "notFound"
+        },
+        forbidden: {
+            responseType:"forbidden"
+        }
+    },
+    create : async function(inputs, exits){
+        try {
+            let user = await sails.models.marketuser.create(inputs);
+            if (!user || !user.password || !user.email){
+                return exits.badRequest({
+                    code:"403",
+                    msg:"创建用户失败"
+                })
+            }
+            return exits.created({
+                code:"201",
+                msg:"创建用户成功",
+                data:inputs
+            })
+        }catch (e) {
+            console.log(e.message);
+            throw 'error'
+        }},
     register:function (req, res) {
       sails.log.debug("MarketUserController:req.method", req.method);
       sails.log.debug("MarketUserController:req.url", req.url);
@@ -18,10 +72,8 @@ var self = module.exports =  {
         username:req.body.email
       };
       var user = req.body;
-      var email = req.body.email;
-      var password = req.body.password;
 
-      var request = unirest[req.method.toLowerCase()]("http://10.89.127.171:8001" + '/consumers');
+      var request = unirest[req.method.toLowerCase()](sails.config.kong_admin_url + '/consumers');
       var konga_extras;
       if(req.body && req.body.extras) {
           konga_extras = req.body.extras;
@@ -37,12 +89,10 @@ var self = module.exports =  {
               sails.log.error("KongProxyController", "request error", response.body);
               return res.negotiate(response);
           }
-
-          return res.json(response.body)
-      })
+          user.id = response.body.id;
+          self.create(user, res);
+          return response.body;
+      });
   },
-    create:function (req, res) {
-
-    }
 };
 

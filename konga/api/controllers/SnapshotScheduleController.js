@@ -8,8 +8,6 @@ module.exports = _.merge(_.cloneDeep(require('../base/Controller')), {
 
 
     create : function (req,res) {
-
-
         // Validate cron
         if(!cron.validate(req.body.cron)) {
             return res.badRequest({
@@ -49,10 +47,5 @@ module.exports = _.merge(_.cloneDeep(require('../base/Controller')), {
                     return res.json(created);
                 });
         });
-
-
-
-
-
     }
 });

@@ -7,32 +7,31 @@
 
 module.exports = {
   schema: true,
+  migrate: 'safe',
   autoPK : false,
+  tableName:'market_user',
   attributes: {
-    tableName:'market_user',
-    attributes: {
-      id:{
-        type:'string',
-        required: true,
-      },
-      email:{
-        type:'string',
-        required: true,
-      },
-      phone:{
-        type:'string',
-        required: false
-      },
-      idcard:{
-        type:'string',
-        required: false,
-      },
-      password:{
-        type:'string',
-        required:true,
-      }
+    id:{
+      type:'string',
+      required: true,
+    },
+    email:{
+      type:'string',
+      required: true,
+      email: true
+    },
+    phone:{
+      type:'string',
+      required: false
+    },
+    idcard:{
+      type:'string',
+      required: false,
+    },
+    password:{
+      type:'string',
+      required:true,
     }
-
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
