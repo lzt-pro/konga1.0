@@ -70,9 +70,6 @@ module.exports = _.merge(_.cloneDeep(require('../base/Controller')), {
                         if(err) return res.negotiate(err);
                         return  res.json(user)
                     })
-
-
-
         })
     }
 });

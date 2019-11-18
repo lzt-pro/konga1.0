@@ -162,5 +162,7 @@ module.exports.routes = {
   'DELETE /kong/*': 'KongProxyController.proxy',
 
   'POST /api-platform/v1/kong/user':'MarketUserController.register',
-  'POST /api-platform/v1/user':'MarketUserController.create'
+  'POST /api-platform/v1/user':'MarketUserController.create',
+  'post /api-platform/v1/user/login':'MarketUserController.login',
+  'GET /api-platform/v1/user/test':'MarketUserController.test'
 };

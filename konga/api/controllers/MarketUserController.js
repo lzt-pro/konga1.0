@@ -94,5 +94,18 @@ var self = module.exports =  {
           return response.body;
       });
   },
+    login:function (req, res) {
+        sails.log.debug("MarketUserController:req.method", req.method);
+        MarketService.login(req, res, function (err, user) {
+            if (!err) return res.json(user);
+            else return res.json({
+                code:"404",
+                err:err
+            })
+        })
+    },
+    test:function (req, res) {
+        res.json({code:"200",msg:"验证通过"})
+    }
 };
 

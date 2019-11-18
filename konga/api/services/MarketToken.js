@@ -61,8 +61,31 @@ module.exports.verify = function verify(token, next) {
     return jwt.verify(
         token, // The token to be verified
         process.env.TOKEN_SECRET || "oursecret", // The secret we used to sign it.
-        {}, // Options, none in this case
-        next // The callback to be call when the verification is done.
+        function(error, decode){
+            if (error){
+                sails.log.error("验证出错！" + error.message);
+               next({
+                   code:"403",
+                   msg: "登录信息验证有误，请重新登录！"
+               },decode)
+            }else {
+                sails.log.debug(decode);
+                if (decode.data){
+                    if (decode.exp > Date.now()){
+                        next({
+                            code:"403",
+                            msg:"登录已超时，请重新登录"
+                        },decode)
+                    }
+                    next(error,decode)
+                }else {
+                    next({
+                        code:"404",
+                        msg: "没有找到Token数据"
+                    },decode)
+                }
+            }
+        }
     );
 };
 
@@ -99,6 +122,7 @@ module.exports.getToken = function getToken(request, next, throwError) {
     } else if (throwError) { // Otherwise request didn't contain required JWT token
         throw new Error('No authorization header was found');
     }
-    return sails.services.token.verify(token, next);
+
+    return sails.services.markettoken.verify(token, next);
 };
 

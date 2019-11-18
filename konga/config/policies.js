@@ -164,7 +164,7 @@ module.exports.policies = {
   },
 
   MarketUserController:{
-
+    "test":['marketauthenticated']
   }
 
 

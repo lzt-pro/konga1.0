@@ -281,7 +281,6 @@ var AuthController = {
       });
     });
   },
-
   /**
    * Action to check if given password is same as current user password. Note that
    * this action is only allowed authenticated users. And by default given password
