@@ -1,8 +1,10 @@
 var unirest = require("unirest");
+var cookie = require("cookie");
 var _ = require('lodash');
 var MarketService = require("../services/MarketService");
 var ProxyHooks = require("../services/KongProxyHooks");
 var Utils = require('../services/Utils');
+var cookieParser = require('cookie-parser');
 /**
  * MarketUserController
  *
@@ -97,15 +99,26 @@ var self = module.exports =  {
     login:function (req, res) {
         sails.log.debug("MarketUserController:req.method", req.method);
         MarketService.login(req, res, function (err, user) {
-            if (!err) return res.json(user);
-            else return res.json({
-                code:"404",
-                err:err
-            })
+            if (!err) {
+                res.cookie("User-token", user, {maxAge:((Date.now()/1000) +(60*60*24))});
+                sails.log.debug("Cookie：" + req.headers.cookie);
+                return res.json(user);
+            }
+            else {
+                return res.json({
+                    code:"404",
+                    err:err
+                })
+            }
         })
     },
+    logout:function (req, res){
+        sails.log.debug("MarketUserController:req.method", req.method);
+        res.cookie("User-token", null, {maxAge:-1});
+        res.json({code:"200",msg:"用户注销成功！"})
+    },
     test:function (req, res) {
-        res.json({code:"200",msg:"验证通过"})
+        res.json({code:"200",msg:"验证通过",id:req.token})
     }
 };
 

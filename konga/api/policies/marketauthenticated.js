@@ -30,11 +30,12 @@ module.exports = function authenticated(request, response, next) {
     /**
      * Helper function to process possible error and actual token after it is decoded.
      *
+     * @param request
      * @param   {{}}      error Possible error
-     * @param   {Number}  token Decoded JWT token data
+     * @param decode
      * @returns {*}
      */
-    var verify = function verify(error, decode) {
+    var verify = function verify(request, error, decode) {
         if (error){
             return response.json(401, {message: 'Given authorization token is not valid', logout: true});
         }else {

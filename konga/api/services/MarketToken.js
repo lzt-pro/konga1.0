@@ -50,12 +50,13 @@ module.exports.issueKongConnectionToken = function issueKong(connection) {
 /**
  * Service method to verify that the token we received on a request hasn't be tampered with.
  *
+ * @param request
  * @param   {String}    token   Token to validate
  * @param   {Function}  next    Callback function
  *
  * @returns {*}
  */
-module.exports.verify = function verify(token, next) {
+module.exports.verify = function verify(request ,token, next) {
     sails.log.verbose(__filename + ':' + __line + ' [Service.Token.verify() called]');
 
     return jwt.verify(
@@ -77,7 +78,7 @@ module.exports.verify = function verify(token, next) {
                             msg:"登录已超时，请重新登录"
                         },decode)
                     }
-                    next(error,decode)
+                    next(request, error,decode)
                 }else {
                     next({
                         code:"404",
@@ -102,9 +103,11 @@ module.exports.getToken = function getToken(request, next, throwError) {
     sails.log.verbose(__filename + ':' + __line + ' [Service.Token.getToken() called]');
 
     var token = '';
-
+    if (request.cookies['User-token']){
+        token = request.cookies['User-token'].token;
+    }
     // Yeah we got required 'authorization' header
-    if (request.headers && request.headers.authorization) {
+    else if (request.headers && request.headers.authorization) {
         var parts = request.headers.authorization.split(' ');
 
         if (parts.length === 2) {
@@ -122,7 +125,6 @@ module.exports.getToken = function getToken(request, next, throwError) {
     } else if (throwError) { // Otherwise request didn't contain required JWT token
         throw new Error('No authorization header was found');
     }
-
-    return sails.services.markettoken.verify(token, next);
+    return sails.services.markettoken.verify(request, token, next);
 };
 
