@@ -146,7 +146,7 @@ var KongService = {
         });
     });
   },
-
+//这里的endpoint是之前传入的req.url  cb是err 和 data
   listAllCb: function (req, endpoint, cb) {
     var url = (Utils.withoutTrailingSlash(req.kong_admin_url) || Utils.withoutTrailingSlash(req.connection.kong_admin_url)) + endpoint;
 

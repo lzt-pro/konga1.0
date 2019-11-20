@@ -29,6 +29,7 @@ var self = module.exports = {
     req.url = req.url.replace('/kong', ''); // Remove the /kong prefix
     var entity = getEntityFromRequest(req);
 
+    //打印请求的方法、路径、实体
     sails.log.debug("KongProxyController:req.method", req.method)
     sails.log.debug("KongProxyController:req.url", req.url)
     sails.log.debug("KongProxyController:entity", entity)
@@ -78,7 +79,12 @@ var self = module.exports = {
         }
       }
     }
-
+    /**
+     * unirest函数用法
+     * .headers 发送头部信息
+     * send 是指发送json数据或者entity实体
+     * end是指发送响应，发送请求
+     */
     // Apply before Hooks
     switch(req.method.toLowerCase()) {
       case "patch":
@@ -104,9 +110,9 @@ var self = module.exports = {
     req.url = req.url.replace('/kong', ''); // Remove the /kong prefix
     const entity = req.params.entity;
 
-    sails.log.debug("KongProxyController:listAllEntityRecords:req.method", req.method)
-    sails.log.debug("KongProxyController:listAllEntityRecords:req.url", req.url)
-    sails.log.debug("KongProxyController:listAllEntityRecords:entity", entity)
+    sails.log.debug("KongProxyController:listAllEntityRecords:req.method 这是GET方法", req.method)
+    sails.log.debug("KongProxyController:listAllEntityRecords:req.url 这是GET方法", req.url)
+    sails.log.debug("KongProxyController:listAllEntityRecords:entity 这是GET方法", entity)
 
     KongService.listAllCb(req, req.url, (err, data) => {
       if(err) return res.negotiate(err);
@@ -121,6 +127,7 @@ var self = module.exports = {
    * @param konga_extras
    * @param req
    * @param res
+   * 这里是给Kong发送请求
    */
   send: function (entity, unirestReq, konga_extras, req, res) {
 
