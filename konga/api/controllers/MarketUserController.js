@@ -57,6 +57,15 @@ var self = module.exports =  {
                     msg:"创建用户失败"
                 })
             }
+            var request = unirest['post'](sails.config.kong_admin_url + '/consumers/' + user.id + "/key-auth");
+            await  request.end(function (response, key_auth) {
+                if(response.error){
+                    sails.log.error("KongProxyController", "request error", response.body);
+                    return exits.negotiate(response);
+                }
+                key_auth = response.body;
+                return key_auth;
+            });
             return exits.created({
                 code:"201",
                 msg:"创建用户成功",
@@ -74,7 +83,6 @@ var self = module.exports =  {
         username:req.body.email
       };
       var user = req.body;
-
       var request = unirest[req.method.toLowerCase()](sails.config.kong_admin_url + '/consumers');
       var konga_extras;
       if(req.body && req.body.extras) {
@@ -119,6 +127,15 @@ var self = module.exports =  {
     },
     test:function (req, res) {
         res.json({code:"200",msg:"验证通过",id:req.token})
+    },
+    key_auth:function (req, res) {
+        var id = req.query.id;
+        unirest.get(sails.config.kong_admin_url + '/consumers/' + id + "/key-auth")
+            .headers(MarketService.headers(true))
+            .end(function (response) {
+                if (response.error) return res.kongError(response);
+                return res.json(response.body);
+            })
     }
 };
 

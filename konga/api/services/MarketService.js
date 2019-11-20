@@ -13,9 +13,15 @@ var MarketService = {
         sails.models.marketuser.findOne({email:email})
             .exec(function (err, user) {
                 if(err) return res.negotiate(err);
-                if (!user) return res.notFound('用户名不存在');
+                if (!user) return res.notFound({
+                    code:"404",
+                    msg:"用户名不存在"
+                });
                 if(user.password !== password){
-                    return res.notFound('密码错误');
+                    return res.notFound({
+                        code:"404",
+                        msg:"密码错误"
+                    });
                 }
                 sails.log.debug("密码查询成功！");
                 var payload = {

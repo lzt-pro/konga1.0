@@ -165,5 +165,6 @@ module.exports.routes = {
   'POST /api-platform/v1/user':'MarketUserController.create',
   'post /api-platform/v1/user/login':'MarketUserController.login',
   'GET /api-platform/v1/user/logout':'MarketUserController.logout',
-  'GET /api-platform/v1/user/test':'MarketUserController.test'
+  'GET /api-platform/v1/user/test':'MarketUserController.test',
+  'GET /api-platform/v1/user/key-auth':'MarketUserController.key_auth'
 };

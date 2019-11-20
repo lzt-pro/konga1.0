@@ -166,6 +166,7 @@ module.exports.policies = {
   MarketUserController:{
     "test":['marketauthenticated'],
     //"logout":['marketauthenticated']
+    "key_auth":['marketauthenticated']
   }
 
 
