@@ -23,7 +23,7 @@ module.exports = {
 
   port: process.env.PORT || 1337,
 
-  host: process.env.HOST || "0.0.0.0",
+  host: process.env.HOST || "127.0.0.1",
 
   kong_admin_url: process.env.KONG_ADMIN_URL || 'http://10.89.127.171:8001',
 
