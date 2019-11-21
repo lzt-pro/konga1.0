@@ -167,6 +167,8 @@ module.exports.routes = {
   'GET /api-platform/v1/user/logout':'MarketUserController.logout',
   'GET /api-platform/v1/user/test':'MarketUserController.test',
 
-  //用户与路由一一绑定
-  'POST /api-platform/v1/bind':'PurchaseBehaviorController.bind'
+  //用户与路由ACL绑定
+  'POST /api-platform/v1/bind':'PurchaseBehaviorController.bind',
+  //用户与路由ACL解绑
+  'DELETE /api-platform/v1/rebind':'PurchaseBehaviorController.rebind'
 };

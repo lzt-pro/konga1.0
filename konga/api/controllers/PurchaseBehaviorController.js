@@ -36,9 +36,10 @@ var self = module.exports = {
         var url =  sails.config.kong_admin_url+ "/routes/"+routeId+"/plugins";
         //var request = unirest["GET"](req.connection.kong_admin_url + "/plugins/"+routeId);
 
-        sails.log.debug('KongService: listAllCb', url);
+        sails.log.debug('PurchaseBehaviorService: bind', url);
         //获取数据，得到对应路由的acl插件的id
-        var getData = function (previousData, url) {
+        var getData = function (previousData, url,callback) {
+            var flag=0;
             unirest.get(url)
                 .headers(KongService.headers(req, true))
                 .end(function (response) {
@@ -49,23 +50,25 @@ var self = module.exports = {
                         getData(apis, response.body.next);
                     }
                     else {
-                        var i=0;
-                        sails.log.debug('输出当前插件的名称'+apis[i].name+',插件个数是：'+apis.length);
+                        sails.log.debug('插件个数是：'+apis.length);
                         for (var i=0,index=0;i<apis.length;i++){
-                            if(apis[index.name=='acl']){
+                            if(apis[i].name=='acl'){
                                 var index = i;
+                                aclId=apis[index].id;
+                                whitelist=apis[index].config.whitelist[0];
+                                callback(whitelist,consumerId,req,res)
+                                sails.log.debug('acl group is '+whitelist);
+
                             }
                         }
-                        aclId=apis[index].id;
-                        whitelist=apis[index].config.whitelist[0];
-                        self.bindact(whitelist,consumerId,req,res)
-                        sails.log.debug('acl group is '+whitelist);
+
                     }
-                    return res.ok();
+
+
                 });
 
         };
-        getData([],`${url}`);
+        getData([],`${url}`,self.bindact);
 
 
     },
@@ -79,8 +82,107 @@ var self = module.exports = {
             .send({group:whitelist})
             .end(function (response) {
                 if (response.error) return res.kongError(response)
-                else sails.log.debug("绑定成功");
+                else {sails.log.debug("绑定成功");
+                res.send("绑定成功")
+                }
+            });
+    },
+    /**
+     * 用户与路由ACL插件解绑
+     * @param req
+     * @param res
+     */
+    rebind:function (req,res) {
+        sails.log.debug("这是测试rebind方法"),
+            req.url = req.url.replace('/api-platform/v1/bind/', '');
+        var routeId=req.body.routeId;
+        var consumerId=req.body.consumerId;
+        sails.log.debug("routeId:"+routeId+"  consumerId:"+consumerId);
+
+        var url =  sails.config.kong_admin_url+ "/consumers/"+consumerId+"/acls";
+        sails.log.debug('PurchaseBehaviorService: rebind-findAllAclsByconsumerId', url);
+        //根据消费者id查询该消费者所有的acl插件字段
+        var getAclByconsumerId = function (previousData, url,callback) {
+            unirest.get(url)
+                .headers(KongService.headers(req, true))
+                .end(function (response) {
+                    if (response.error) return res.kongError(response)
+                    var apis = previousData.concat(response.body.data);
+                    if (response.body.next) {
+                        getAclByconsumerId(apis, response.body.next);
+                    }
+                    else {
+                        sails.log.debug('当前消费者绑定的ACL插件个数是：'+apis.length);
+                    }
+                     var urlgroup =  sails.config.kong_admin_url+ "/routes/"+routeId+"/plugins";
+                    callback(req,res,[],urlgroup,apis,consumerId,self.rebindact);
+                    //sails.log.debug('groupName传递过来了');
+
+
+                });
+        };
+        getAclByconsumerId([],`${url}`,self.getGroupByrouteId);
+    },
+    //根据路由id获得该路由下面的ACL插件内group字段
+    getGroupByrouteId :function (req,res,previousData, url,apis,consumerId,callback) {
+
+        sails.log.debug('进入getGroupByrouteId函数，根据路由id获得该路由下面的ACL插件内group字段')
+        unirest.get(url)
+            .headers(KongService.headers(req, true))
+            .end(function (response) {
+                if (response.error) return res.kongError(response)
+                var apis1 = previousData.concat(response.body.data);
+                if (response.body.next) {
+                    getGroupByrouteId(req,res,apis1, response.body.next);
+                }
+                else {
+                    sails.log.debug('当前路由的插件个数是：'+apis.length);
+                    for (var i=0,index=-1;i<apis1.length;i++){
+                        if(apis1[i].name=='acl'){
+                            index = i;
+                        }
+                    }
+                    //var aclId=apis1[index].id;
+                    var groupName=apis1[index].config.whitelist[0];
+
+                    sails.log.debug('得到的groupName为：'+groupName);
+
+                    // for(var i=0,index=0;i<apis.length;i++){
+                    //     if(apis[i].group==groupName){
+                    //         index=i;
+                    //        var consumerAclId = apis[index].id;
+                    //         callback(consumerId,consumerAclId,req,res);
+                    //     }
+                    // }
+                    for (var i=0;i<apis.length;i++){
+                        if(apis[i].group==groupName){
+                            var consumerAclId = apis[i].id;
+                            callback(consumerId,consumerAclId,req,res);
+                            break;
+                        }else if(i==apis.length-1&&apis[i].group!=groupName){
+                            sails.log.debug('当前用户未购买该服务');
+                            res.send("当前用户未购买该服务")
+                        }
+                    }
+                }
+            });
+
+    },
+    //执行删除操作
+    rebindact:function (consumerId,consumerAclId,req,res) {
+        //根据得到的consumerId,与consumerAclId,对消费者上面的acl插件进行解绑
+        sails.log.debug('进入rebindact函数，解绑功能区');
+        var urlact = sails.config.kong_admin_url+"/consumers/"+consumerId+"/acls/"+consumerAclId;
+        //进行解绑操作
+        unirest.delete(urlact)
+            .header(KongService.headers(req, true))
+            .end(function (response) {
+                if (response.error) return res.kongError(response)
+                else {sails.log.debug("解绑成功");
+                res.send("解绑成功");
+                }
             });
     }
-};
 
+    
+};
