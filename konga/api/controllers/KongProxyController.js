@@ -34,6 +34,7 @@ var self = module.exports = {
     sails.log.debug("KongProxyController:req.url", req.url)
     sails.log.debug("KongProxyController:entity", entity)
 
+
     // Fix update method by setting it to "PATCH" as Kong requires
     if (req.method.toLowerCase() === 'put') {
       req.method = "PATCH";

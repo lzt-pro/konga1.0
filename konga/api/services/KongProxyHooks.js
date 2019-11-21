@@ -43,7 +43,14 @@ var self = module.exports = {
 
   afterEntityCreate: function(entityName, req, data, konga_extras, next) {
     sails.log.debug("KongProxyHooks:afterEntityCreate called()", entityName);
-    if(!entityName || !self.hooks[entityName] || !self.hooks[entityName].afterCreate) return next(null, data);
+    if(!entityName || !self.hooks[entityName] || !self.hooks[entityName].afterCreate)
+    {
+      if (entityName === 'routes'){
+
+      }
+      return next(null, data);
+    }
+
     return self.hooks[entityName].afterCreate(req, data, konga_extras, next)
   },
 
