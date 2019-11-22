@@ -170,5 +170,7 @@ module.exports.routes = {
   //用户与路由ACL绑定
   'POST /api-platform/v1/bind':'PurchaseBehaviorController.bind',
   //用户与路由ACL解绑
-  'DELETE /api-platform/v1/rebind':'PurchaseBehaviorController.rebind'
+  'DELETE /api-platform/v1/rebind':'PurchaseBehaviorController.rebind',
+  //根据用户id获得该用户的所有路由信息
+  'GET /api-platform/v1/routes' :'PurchaseBehaviorController.getInfoByConsumerId'
 };

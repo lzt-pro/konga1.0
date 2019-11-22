@@ -11,6 +11,8 @@ var _ = require("lodash");
 var Utils = require('../services/Utils');
 const Kong = require("../services/KongService");
 const async = require("async");
+var PurchaseBe = require("../services/PurchaseBehavior");
+var events = require("events");
 
 
 
@@ -27,6 +29,22 @@ var self = module.exports = {
             type:'string',
             required: true,
         },
+        serviceId:{
+            type:'string',
+            required: true,
+        },
+        // serviceName:{
+        //     type:'string',
+        //     required: true,
+        // },
+        routeHost:{
+            type:'string',
+            required: true,
+        },
+        routeName:{
+            type:'string',
+            required: true,
+        }
 
     },
     exits:{
@@ -121,13 +139,27 @@ var self = module.exports = {
             .end(function (response) {
                 if (response.error)
                 {
-                     res.badRequest("当前用户已经与该服务绑定");
+                     res.created({
+                         code:"409",
+                         msg:"当前用户已经与该服务绑定"});
                 }
                 else {sails.log.debug("绑定成功");
-                   self.create({
-                       consumerId:consumerId,
-                        routeId:routeId
-                   },res)
+                    PurchaseBe.getInfoByRouteId(req,res,routeId,(err,data)=>{
+                        if(err){
+                            return res.serverError(err);
+                        }else {
+                            self.create({
+                                consumerId:consumerId,
+                                routeId:routeId,
+                                serviceId:data.service.id,
+                                //serviceName:data.service,
+                                routeName:data.name,
+                                routeHost:data.hosts,
+
+                        },res)
+                        }
+                    })
+
                 }
             });
     },
@@ -196,7 +228,9 @@ var self = module.exports = {
                             break;
                         }else if(i==apis.length-1&&apis[i].group!=groupName){
                             sails.log.debug('当前用户未购买该服务');
-                            res.badRequest("当前用户未购买该服务")
+                            res.created({
+                                code:"409",
+                                msg:"当前用户未购买该服务"});
 
                         }
                     }
@@ -232,7 +266,37 @@ var self = module.exports = {
 
                 }
             });
+    },
+
+    /**
+     * 根据用户ID，获得所有与该用户绑定的路由和信息
+     */
+    getInfoByConsumerId: async function (req,res) {
+        var conId = req.query.consumerId;
+        sails.log.debug('获得的用户id:'+conId);
+        //根据用户Id，查询该用户名下的简易路由信息
+       await PurchaseBe.getinfoByconId(req,res,conId,(err,data)=>{
+                 res.created({
+                     code:"201",
+                     msg:"查询成功",
+                     data:data
+                 })
+        })
+
+        // var routeId=  PurchaseBe.getrouteId(req,res,conId,(err,routes)=>{
+        //     //拿到路由Id，接下来根据路由id获取该用户下面所有的路由信息
+        //
+        //
+        //   PurchaseBe.getInfoByRouteId(req,res,routes[0].routeId,(err,info)=>{
+        //       res.created({
+        //           code:"201",
+        //           msg:"查询成功",
+        //           data:info
+        //       })
+        //
+        //   })
+        // })
+
     }
 
-    
 };
