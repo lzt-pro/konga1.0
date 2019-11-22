@@ -18,8 +18,46 @@ var self = module.exports = {
     friendlyName: 'Purchase Behavior',
 
     description: 'Purchase Behavior',
+    inputs:{
+        consumerId:{
+            type:'string',
+            required: true,
+        },
+        routeId:{
+            type:'string',
+            required: true,
+        },
 
-
+    },
+    exits:{
+        created:{
+            responseType: 'created'
+        },
+        notFound: {
+            responseType: "notFound"
+        },
+        forbidden: {
+            responseType:"forbidden"
+        }
+    },
+    create : async function(inputs, exits){
+        try {
+            let marketbind = await sails.models.marketbind.create(inputs);
+            if (!marketbind || !marketbind.consumerId || !marketbind.routeId){
+                return exits.badRequest({
+                    code:"403",
+                    msg:"创建绑定关系失败"
+                })
+            }
+            return exits.created({
+                code:"201",
+                msg:"创建绑定关系成功",
+                data:inputs
+            })
+        }catch (e) {
+            console.log(e.message);
+            throw 'error'
+        }},
 
     /**
      *根据whitelist字段给消费者添加分组
@@ -56,7 +94,7 @@ var self = module.exports = {
                                 var index = i;
                                 aclId=apis[index].id;
                                 whitelist=apis[index].config.whitelist[0];
-                                callback(whitelist,consumerId,req,res)
+                                callback(routeId,whitelist,consumerId,req,res)
                                 sails.log.debug('acl group is '+whitelist);
 
                             }
@@ -73,7 +111,7 @@ var self = module.exports = {
 
     },
 
-    bindact: function (whitelist,consumerId,req,res) {
+    bindact: function (routeId,whitelist,consumerId,req,res) {
         //根据得到的acl ID与传入的consumerId对，对购买行为进行绑定
         var urlact = sails.config.kong_admin_url+"/consumers/"+consumerId+"/acls";
         //进行绑定操作
@@ -81,9 +119,15 @@ var self = module.exports = {
             .header(KongService.headers(req, true))
             .send({group:whitelist})
             .end(function (response) {
-                if (response.error) return res.kongError(response)
+                if (response.error)
+                {
+                     res.badRequest("当前用户已经与该服务绑定");
+                }
                 else {sails.log.debug("绑定成功");
-                res.send("绑定成功")
+                   self.create({
+                       consumerId:consumerId,
+                        routeId:routeId
+                   },res)
                 }
             });
     },
@@ -115,7 +159,7 @@ var self = module.exports = {
                         sails.log.debug('当前消费者绑定的ACL插件个数是：'+apis.length);
                     }
                      var urlgroup =  sails.config.kong_admin_url+ "/routes/"+routeId+"/plugins";
-                    callback(req,res,[],urlgroup,apis,consumerId,self.rebindact);
+                    callback(req,res,routeId,[],urlgroup,apis,consumerId,self.rebindact);
                     //sails.log.debug('groupName传递过来了');
 
 
@@ -124,7 +168,7 @@ var self = module.exports = {
         getAclByconsumerId([],`${url}`,self.getGroupByrouteId);
     },
     //根据路由id获得该路由下面的ACL插件内group字段
-    getGroupByrouteId :function (req,res,previousData, url,apis,consumerId,callback) {
+    getGroupByrouteId :function (req,res,routeId,previousData, url,apis,consumerId,callback) {
 
         sails.log.debug('进入getGroupByrouteId函数，根据路由id获得该路由下面的ACL插件内group字段')
         unirest.get(url)
@@ -144,24 +188,16 @@ var self = module.exports = {
                     }
                     //var aclId=apis1[index].id;
                     var groupName=apis1[index].config.whitelist[0];
-
                     sails.log.debug('得到的groupName为：'+groupName);
-
-                    // for(var i=0,index=0;i<apis.length;i++){
-                    //     if(apis[i].group==groupName){
-                    //         index=i;
-                    //        var consumerAclId = apis[index].id;
-                    //         callback(consumerId,consumerAclId,req,res);
-                    //     }
-                    // }
                     for (var i=0;i<apis.length;i++){
                         if(apis[i].group==groupName){
                             var consumerAclId = apis[i].id;
-                            callback(consumerId,consumerAclId,req,res);
+                            callback(routeId,consumerId,consumerAclId,req,res);
                             break;
                         }else if(i==apis.length-1&&apis[i].group!=groupName){
                             sails.log.debug('当前用户未购买该服务');
-                            res.send("当前用户未购买该服务")
+                            res.badRequest("当前用户未购买该服务")
+
                         }
                     }
                 }
@@ -169,7 +205,7 @@ var self = module.exports = {
 
     },
     //执行删除操作
-    rebindact:function (consumerId,consumerAclId,req,res) {
+    rebindact:function (routeId,consumerId,consumerAclId,req,res) {
         //根据得到的consumerId,与consumerAclId,对消费者上面的acl插件进行解绑
         sails.log.debug('进入rebindact函数，解绑功能区');
         var urlact = sails.config.kong_admin_url+"/consumers/"+consumerId+"/acls/"+consumerAclId;
@@ -179,7 +215,21 @@ var self = module.exports = {
             .end(function (response) {
                 if (response.error) return res.kongError(response)
                 else {sails.log.debug("解绑成功");
-                res.send("解绑成功");
+                    sails.models.marketbind.destroy({
+                        'consumerId': consumerId,
+                        'routeId': routeId
+                    }).exec(function (err,data){
+                        if (err) {
+                            return res.negotiate(err);
+                        }
+                        sails.log.debug('Deleted book with `id: 4`, if it existed.');
+                        res.created({
+                            code:"201",
+                            msg:"解除绑定关系成功",
+                            data:data
+                        })
+                    });
+
                 }
             });
     }
