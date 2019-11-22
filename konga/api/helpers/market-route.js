@@ -12,21 +12,22 @@ module.exports = {
       type:'string',
       required:true,
       description:'该Route的ID'
-    }
+    },
   },
 
 
   exits: {
-
     success: {
       description: 'All done.',
     },
-
+    forbidden:{
+      description: 'No done'
+    }
   },
 
 
-  fn: async function (inputs) {
-    // TODO
+  create: async function (inputs) {
+
   }
 
 

@@ -12,6 +12,8 @@ module.exports = {
   tableName:'market_user',
   attributes: {
     id:{
+      primaryKey: true,
+      unique: true,
       type:'string',
       required: true,
     },

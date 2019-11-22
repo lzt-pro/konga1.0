@@ -155,15 +155,18 @@ var self = module.exports = {
             return res.json(data);
           });
         case "delete":
-          user_id = req.url.split('/')[2];
-          sails.models.marketuser.destroy({id:req.url.split('/')[2]})
-              .exec(function (err, user) {
-                if(err) return res.negotiate(err);
-                user = user_id;
-                sails.log.debug("成功删除了" + user + "用户")
-              });
+
           return ProxyHooks.afterEntityDelete(entity,req,function (err) {
             if(err) return res.badRequest(err);
+            if (entity === 'consumers'){
+              user_id = req.url.split('/')[2];
+              sails.models.marketuser.destroy({id:req.url.split('/')[2]})
+                  .exec(function (err, user) {
+                    if(err) return res.negotiate(err);
+                    user = user_id;
+                    sails.log.debug("成功删除了" + user + "用户")
+                  });
+            }
             return res.json(response);
           });
         default:
