@@ -44,6 +44,10 @@ var self = module.exports = {
         routeName:{
             type:'string',
             required: true,
+        },
+        status:{
+            type:'int2',
+            required: true,
         }
 
     },
@@ -76,7 +80,6 @@ var self = module.exports = {
             console.log(e.message);
             throw 'error'
         }},
-
     /**
      *根据whitelist字段给消费者添加分组
      */
@@ -88,10 +91,8 @@ var self = module.exports = {
         var routeId=req.body.routeId;
         var consumerId=req.body.consumerId;
         sails.log.debug("routeId:"+routeId+"  consumerId:"+consumerId);
-
         var url =  sails.config.kong_admin_url+ "/routes/"+routeId+"/plugins";
         //var request = unirest["GET"](req.connection.kong_admin_url + "/plugins/"+routeId);
-
         sails.log.debug('PurchaseBehaviorService: bind', url);
         //获取数据，得到对应路由的acl插件的id
         var getData = function (previousData, url,callback) {
@@ -114,18 +115,12 @@ var self = module.exports = {
                                 whitelist=apis[index].config.whitelist[0];
                                 callback(routeId,whitelist,consumerId,req,res)
                                 sails.log.debug('acl group is '+whitelist);
-
                             }
                         }
-
                     }
-
-
                 });
-
         };
         getData([],`${url}`,self.bindact);
-
 
     },
 
@@ -152,6 +147,7 @@ var self = module.exports = {
                                 consumerId:consumerId,
                                 routeId:routeId,
                                 serviceId:data.service.id,
+                                status:1,
                                 //serviceName:data.service,
                                 routeName:data.name,
                                 routeHost:data.hosts,
@@ -282,20 +278,6 @@ var self = module.exports = {
                      data:data
                  })
         })
-
-        // var routeId=  PurchaseBe.getrouteId(req,res,conId,(err,routes)=>{
-        //     //拿到路由Id，接下来根据路由id获取该用户下面所有的路由信息
-        //
-        //
-        //   PurchaseBe.getInfoByRouteId(req,res,routes[0].routeId,(err,info)=>{
-        //       res.created({
-        //           code:"201",
-        //           msg:"查询成功",
-        //           data:info
-        //       })
-        //
-        //   })
-        // })
 
     }
 

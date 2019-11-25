@@ -19,9 +19,9 @@ var PurchaseBehavior = {
                    return cb(null,data)
               });
     },
-    //获取到路由的Id
+    //根据用户Id获取该用户下的所有路由信息
     getinfoByconId: async function (req,res,conId, cb) {
-        await sails.models.marketbind.find({consumerId: conId})
+        await sails.models.marketbind.find({where:{consumerId: conId,status:1}})
             .exec(function (err, entitys) {
                 if (err) {
                     return res.serverError(err);
