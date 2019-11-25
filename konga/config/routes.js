@@ -167,6 +167,8 @@ module.exports.routes = {
   'GET /api-platform/v1/user/logout':'MarketUserController.logout',
   'GET /api-platform/v1/user/test':'MarketUserController.test',
   'GET /api-platform/v1/user/key-auth':'MarketUserController.key_auth',
-
-  'POST /api-platform/kong/route':'MarketRoutesController.create',
+  'POST /api-platform/v1/kong/route':'MarketRoutesController.create',
+  'GET /api-platform/v1/kong/route':'MarketRoutesController.findone',
+  'POST /api-platform/v1/kong/package':'MarketPackageController.create',
+  'GET /api-platform/v1/kong/package':'MarketPackageController.findone'
 };

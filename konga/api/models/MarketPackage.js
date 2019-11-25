@@ -9,6 +9,7 @@ module.exports = {
   schema: true,
   migrate: 'safe',
   autoPK : false,
+  primaryKey:'id',
   tableName:'market_package',
   attributes: {
     id:{
@@ -16,6 +17,10 @@ module.exports = {
       unique:true,
       type:'string',
       required:true,
+    },
+    name:{
+      type: 'string',
+      required: false
     },
     msg:{
       type: 'string',

@@ -80,6 +80,9 @@ module.exports = {
         created:{
             responseType: 'created'
         },
+        ok:{
+            responseType:'ok'
+        },
         notFound: {
             responseType: "notFound"
         },
@@ -153,6 +156,22 @@ module.exports = {
                 sails.log.error(e.message);
                 throw 'error';
         }
+    },
+    findone: function (inputs, exits) {
+        var id = inputs.query.id;
+        sails.models.marketroutes.find({id:id})
+            .populate('requests')
+            .populate('responds')
+            .exec(function (err, route) {
+                if (err) return exits.badRequest({
+                    code:'403',
+                    msg:'查询过程出现错误'
+                });
+                return exits.ok({
+                    code:'201',
+                    route:route
+                })
+            })
     }
 
 };

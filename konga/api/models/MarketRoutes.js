@@ -10,6 +10,7 @@ module.exports = {
   migrate: 'safe',
   autoPK : false,
   tableName:'market_routes',
+  primaryKey:'id',
   attributes: {
     id:{
       primaryKey: true,
