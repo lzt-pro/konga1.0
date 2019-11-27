@@ -12,9 +12,8 @@ var cookieParser = require('cookie-parser');
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 var self = module.exports =  {
-
-    friendlyName:"Register User",
-    description:"Register User",
+    friendlyName:"API市场用户相关",
+    description:"注册用户、登录、退出、查询用户API-KEY",
     inputs:{
         id:{
             type:'string',
@@ -122,8 +121,12 @@ var self = module.exports =  {
     },
     logout:function (req, res){
         sails.log.debug("MarketUserController:req.method", req.method);
-        res.cookie("User-token", null, {maxAge:-1});
-        res.json({code:"200",msg:"用户注销成功！"})
+        try{
+            res.cookie("User-token", null, {maxAge:-1});
+            res.json({code:"200",msg:"用户注销成功！"})
+        }catch (e) {
+            throw e;
+        }
     },
     test:function (req, res) {
         res.json({code:"200",msg:"验证通过",id:req.token})

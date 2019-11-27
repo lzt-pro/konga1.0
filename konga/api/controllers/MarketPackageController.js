@@ -65,13 +65,15 @@ module.exports = {
   },
   findone:function (inputs, exits) {
         var id = inputs.query.id;
+        var pagesize = inputs.query.pagesize ? inputs.query.pagesize : 10;
+        var pageindex = inputs.query.pageindex ? inputs.query.pageindex : 0;
       if(!id){
           return exits.badRequest({
               code:'404',
               msg:'没有获取到API包的ID'
           })
       }
-      sails.models.marketpackage.find({id:id})
+      sails.models.marketpackage.find({where:{id:id},skip:(pageindex-1)*pagesize+1, limit:pagesize})
           .populate("routes")
           .exec(function (err, pack) {
               if (err){
