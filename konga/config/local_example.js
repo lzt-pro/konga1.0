@@ -40,6 +40,7 @@ module.exports = {
 
   models: {
     connection: process.env.DB_ADAPTER || 'localDiskDb',
+
   },
 
   session: {
