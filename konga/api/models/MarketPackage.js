@@ -31,9 +31,14 @@ module.exports = {
       required:false
     },
     routes:{
-      collection: 'marketroutespackages',
+      collection: 'marketroutes',
       via: 'fk_pack_id',
       through:'marketroutespackages'
+    },
+    users:{
+      collection: "marketuser",
+      via: "fk_pack_id",
+      through: "marketapply"
     }
   },
 };

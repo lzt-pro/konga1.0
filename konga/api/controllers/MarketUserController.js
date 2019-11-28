@@ -17,11 +17,11 @@ var self = module.exports =  {
     inputs:{
         id:{
             type:'string',
-            required: true,
+            required: false,
         },
         email:{
             type:'string',
-            required: true,
+            required: false,
         },
         phone:{
             type:'string',
@@ -139,6 +139,52 @@ var self = module.exports =  {
                 if (response.error) return res.kongError(response);
                 return res.json(response.body);
             })
+    },
+    findOne:function (inputs, exits) {
+        var id = inputs.query.id;
+        sails.models.marketuser.find({id:id})
+            .exec(function (err, user) {
+                if (err) return exits.ok({
+                    code:"403",
+                    msg:"查询用户信息失败！"
+                });
+                unirest.get(sails.config.kong_admin_url + '/consumers/' + id + "/key-auth")
+                    .headers(MarketService.headers(true))
+                    .end(function (response) {
+                        if (response.error) return exits.badRequest({
+                            code:"403",
+                            msg:"查询用户API-KEY失败！"
+                        });
+                        user[0].api_key = response.body.data[0].key;
+                        return exits.ok({
+                            code:"201",
+                            msg:"查询成功",
+                            data:user[0]
+                        });
+                    })
+            })
+    },
+    update:function (inputs, exits) {
+        if (!inputs.body.id){
+            return exits.badRequest({
+                code:"403",
+                msg:"没有获得用户ID！"
+            });
+        }
+        sails.models.marketuser.update(inputs.body.id)
+            .set(inputs.body)
+            .exec(function (err, user) {
+                if (err) return exits.badRequest({
+                    code:"403",
+                    msg:"更新用户信息错误！"
+                });
+                return  exits.ok({
+                    code:"201",
+                    msg:"更新用户信息成功！",
+                    data:user
+                })
+            })
     }
+
 };
 

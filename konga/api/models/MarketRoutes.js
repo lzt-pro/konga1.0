@@ -31,7 +31,7 @@ module.exports = {
       via: 'fk_route_id'
     },
     packages:{
-      collection : 'marketroutespackages',
+      collection : 'marketpackage',
       via: 'fk_route_id',
       through:'marketroutespackages'
     }
