@@ -20,66 +20,7 @@ var self = module.exports = {
     friendlyName: 'Purchase Behavior',
 
     description: 'Purchase Behavior',
-    inputs:{
-        consumerId:{
-            type:'string',
-            required: true,
-        },
-        routeId:{
-            type:'string',
-            required: true,
-        },
-        serviceId:{
-            type:'string',
-            required: true,
-        },
-        // serviceName:{
-        //     type:'string',
-        //     required: true,
-        // },
-        routeHost:{
-            type:'string',
-            required: true,
-        },
-        routeName:{
-            type:'string',
-            required: true,
-        },
-        status:{
-            type:'int2',
-            required: true,
-        }
 
-    },
-    exits:{
-        created:{
-            responseType: 'created'
-        },
-        notFound: {
-            responseType: "notFound"
-        },
-        forbidden: {
-            responseType:"forbidden"
-        }
-    },
-    create : async function(inputs, exits){
-        try {
-            let marketbind = await sails.models.marketbind.create(inputs);
-            if (!marketbind || !marketbind.consumerId || !marketbind.routeId){
-                return exits.badRequest({
-                    code:"403",
-                    msg:"创建绑定关系失败"
-                })
-            }
-            return exits.created({
-                code:"201",
-                msg:"创建绑定关系成功",
-                data:inputs
-            })
-        }catch (e) {
-            console.log(e.message);
-            throw 'error'
-        }},
     /**
      *根据whitelist字段给消费者添加分组
      */
@@ -103,7 +44,6 @@ var self = module.exports = {
                     if (response.error) return res.kongError(response)
                     var apis = previousData.concat(response.body.data);
                     if (response.body.next) {
-
                         getData(apis, response.body.next);
                     }
                     else {
@@ -143,7 +83,7 @@ var self = module.exports = {
                         if(err){
                             return res.serverError(err);
                         }else {
-                            self.create({
+                            PurchaseBe.update({
                                 consumerId:consumerId,
                                 routeId:routeId,
                                 serviceId:data.service.id,
@@ -151,14 +91,91 @@ var self = module.exports = {
                                 //serviceName:data.service,
                                 routeName:data.name,
                                 routeHost:data.hosts,
-
                         },res)
                         }
                     })
-
                 }
             });
     },
+    /**
+     * 审核操作
+     * 前端提交consumerId与routeId,同时只记录，不绑定状态值设为0
+     */
+    putAudit:function(req,res){
+            var consumerId = req.body.consumerId;
+            var routeId=req.body.routeId;
+
+             PurchaseBe.getInfoByRouteId(req,res,routeId,(err,data)=>{
+            if(err){
+                return res.serverError(err);
+            }else {
+                PurchaseBe.finder({
+                    consumerId:consumerId,
+                    routeId:routeId,
+                    serviceId:data.service.id,
+                    status:0,
+                    //serviceName:data.service,
+                    routeName:data.name,
+                    routeHost:data.hosts,
+                },res)
+            }
+        })
+    },
+    deleteAudit:function(req,res){
+        var consumerId = req.body.consumerId;
+        var routeId=req.body.routeId;
+        PurchaseBe.getInfoByRouteId(req,res,routeId,(err,data)=>{
+            if(err){
+                return res.serverError(err);
+            }else {
+                PurchaseBe.deleteAudit({
+                    consumerId:consumerId,
+                    routeId:routeId,
+                    status:0
+                },res)
+            }
+        })
+    },
+    // /**
+    //  * 根据包的ID绑定
+    //  */
+    // bindByPacId(req,res){
+    //     var consumerId = req.body.consumerId;
+    //     var packageId = req.body.packageId;
+    //     //根据packageId查出该包下的所有routeId,并进行绑定操作
+    //     PurchaseBe.getRouteIdsByPackageId(req,res,packageId,(err,routesId)=>{
+    //         routesId.forEach(function (routeId) {
+    //             self.bindByConsumerIdAndRouteId(req,res,consumerId,routeId,packageId,(err,flag)=>{
+    //                 if(flag==0){
+    //                     res.create({
+    //                         msg:'该包绑定完成'
+    //                     })
+    //                 }
+    //             })
+    //         })
+    //     })
+    // },
+    // bindByConsumerIdAndRouteId:function(req,res,consumerId,routeId,packageId,cb){
+    //     PurchaseBe.getWhitelistByrouteIdAndConsumerId(req,res,routeId,consumerId,(err,whitelist)=>{
+    //         var urlact = sails.config.kong_admin_url+"/consumers/"+consumerId+"/acls";
+    //         unirest.post(urlact)
+    //             .header(KongService.headers(req, true))
+    //             .send({group:whitelist})
+    //             .end(function (response) {
+    //                 if (response.error)
+    //                 {
+    //                     return cb(err,0)
+    //                 }
+    //                 else {
+    //                    // sails.model.marketapply.update({where:{fk_pack_id:packageId,fk_user_id:consumerId}})
+    //                    //     .set({
+    //                    //         state:1
+    //                    //     })
+    //                     return cb(null,1);
+    //                 }
+    //             });
+    //     })
+    // },
     /**
      * 用户与路由ACL插件解绑
      * @param req
@@ -246,8 +263,7 @@ var self = module.exports = {
                 if (response.error) return res.kongError(response)
                 else {sails.log.debug("解绑成功");
                     sails.models.marketbind.destroy({
-                        'consumerId': consumerId,
-                        'routeId': routeId
+                        where:{consumerId: consumerId,routeId: routeId,status:1}
                     }).exec(function (err,data){
                         if (err) {
                             return res.negotiate(err);
