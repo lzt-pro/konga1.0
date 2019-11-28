@@ -136,6 +136,22 @@ var self = module.exports = {
             }
         })
     },
+    //查询所有未审核的信息,根据用户查，查询所有
+    findInfoAudit:function(req,res){
+        var consumerId = req.query.consumerId;
+        PurchaseBe.getInfoUnaudit(consumerId,(err,data)=>{
+            if(err){
+                res.serverError(err)
+            }
+            else{
+                res.created({
+                    code:'201',
+                    msg:'查询成功',
+                    data:data
+                })
+            }
+        })
+    },
     // /**
     //  * 根据包的ID绑定
     //  */

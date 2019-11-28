@@ -134,6 +134,36 @@ var PurchaseBehavior = {
             console.log(e.message);
             throw 'error'
         }},
+    getInfoUnaudit:function(consumerId,cb){
+        if(consumerId!=null){
+            sails.models.marketbind.find({
+                where:{consumerId:consumerId,
+                    status:0}
+            })
+                .exec(function (err, data) {
+                    if (err) {
+                        exits.serverError(err)
+                    }
+                    else{
+                        return cb(null,data)
+                    }
+                });
+        }else{
+            sails.models.marketbind.find({
+                where:{
+                    status:0}
+            })
+                .exec(function (err, data) {
+                    if (err) {
+                        exits.serverError(err)
+                    }
+                    else{
+                        return cb(null,data)
+                    }
+                });
+        }
+
+    },
 
     //根据路由的Id获得所需的所有信息
     getInfoByRouteId: async function (req, res, routeId, cb) {

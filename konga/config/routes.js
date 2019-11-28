@@ -180,5 +180,6 @@ module.exports.routes = {
   'DELETE /api-platform/v1/rebind':'PurchaseBehavior.rebind',
   'GET /api-platform/v1/routes':'PurchaseBehavior.getInfoByConsumerId',
   'POST /api-platform/v1/putAudit':'PurchaseBehavior.putAudit',
-  'DELETE /api-platform/v1/deleteAudit':'PurchaseBehavior.deleteAudit'
+  'DELETE /api-platform/v1/deleteAudit':'PurchaseBehavior.deleteAudit',
+  'GET /api-platform/v1/unAudit':'PurchaseBehavior.findInfoAudit',
 };
