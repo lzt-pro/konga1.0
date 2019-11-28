@@ -91,6 +91,7 @@ var self = module.exports = {
             responseType:"forbidden"
         }
     },
+    //创建路由的功能
     create : function (inputs, exits) {
         try {
            var requests = inputs.body.requests ? inputs.body.requests : [];
@@ -146,6 +147,8 @@ var self = module.exports = {
                                                                 code:'403',
                                                                 error:"插入包的过程中出现错误"
                                                             });
+
+
                                                             return exits.created({
                                                                 code:'200',
                                                                 msg:'创建路由请求成功！',
@@ -225,6 +228,8 @@ var self = module.exports = {
                 throw 'error';
         }
     },
+
+    //查询该路由的详细信息（相当于API文档的功能）
     findone: function (inputs, exits) {
         var id = inputs.query.id;
         sails.models.marketroutes.find({id:id})
@@ -241,6 +246,8 @@ var self = module.exports = {
                 })
             })
     },
+
+    //删除路由，连同所有的其他关联表都删除
     delete:function (inputs, exits) {
         var id = inputs.query.id;
         MarketRouteService.delete(id, null,function (route, route_null) {

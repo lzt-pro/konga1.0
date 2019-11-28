@@ -45,6 +45,8 @@ module.exports = {
             responseType:"forbidden"
         }
     },
+
+  //创建API服务包
   create:function (inputs, exits) {
         var pack = inputs.body;
         if (!pack.id){
@@ -63,8 +65,11 @@ module.exports = {
                 })
             })
   },
+
+  //查找该包下所有的路由
   findone:function (inputs, exits) {
         var id = inputs.query.id;
+        var fk_user_id = inputs.query.user_id ? inputs.query.user_id : null;
         var pagesize = inputs.query.pagesize ? inputs.query.pagesize : 10;
         var pageindex = inputs.query.pageindex ? inputs.query.pageindex : 0;
       if(!id){
@@ -86,6 +91,30 @@ module.exports = {
                   code:"201",
                   msg:"查找API成功",
                   data:pack
+              })
+          })
+  },
+
+  //查找所有的包
+  findall:function (inputs, exits) {
+      var pagesize = inputs.query.pagesize;
+      var pageindex = inputs.query.pageindex;
+      if (!pagesize || !pageindex){
+          exits.badRequest({
+              code:"403",
+              msg:"参数格式不正确（缺少分页）"
+          })
+      }
+      sails.models.marketpackage.find({skip:(pageindex-1)*pagesize+1, limit:pagesize})
+          .exec(function (err, packages) {
+              if (err) return exits.badRequest({
+                  code:"403",
+                  msg:"查找包的过程出错！"
+              });
+              return exits.ok({
+                  code:"201",
+                  msg:"查找成功",
+                  data:packages
               })
           })
   }

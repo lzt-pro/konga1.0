@@ -47,6 +47,7 @@ var self = module.exports =  {
             responseType:"forbidden"
         }
     },
+    //调用Kong的API去创建用户（前端调用的是这个）
     create : async function(inputs, exits){
         try {
             let user = await sails.models.marketuser.create(inputs);
@@ -74,6 +75,8 @@ var self = module.exports =  {
             console.log(e.message);
             throw 'error'
         }},
+
+    //在自建表market_user当中创建用户
     register:function (req, res) {
       sails.log.debug("MarketUserController:req.method", req.method);
       sails.log.debug("MarketUserController:req.url", req.url);
@@ -103,6 +106,8 @@ var self = module.exports =  {
           return response.body;
       });
   },
+
+    //用户登录
     login:function (req, res) {
         sails.log.debug("MarketUserController:req.method", req.method);
         MarketService.login(req, res, function (err, user) {
@@ -119,6 +124,8 @@ var self = module.exports =  {
             }
         })
     },
+
+    //用户退出
     logout:function (req, res){
         sails.log.debug("MarketUserController:req.method", req.method);
         try{
@@ -128,9 +135,13 @@ var self = module.exports =  {
             throw e;
         }
     },
+
+    //测试，实际当中不使用
     test:function (req, res) {
         res.json({code:"200",msg:"验证通过",id:req.token})
     },
+
+    //查找指定用户的API-KEY
     key_auth:function (req, res) {
         var id = req.query.id;
         unirest.get(sails.config.kong_admin_url + '/consumers/' + id + "/key-auth")
@@ -140,6 +151,8 @@ var self = module.exports =  {
                 return res.json(response.body);
             })
     },
+
+    //查找指定用户的信息
     findOne:function (inputs, exits) {
         var id = inputs.query.id;
         sails.models.marketuser.find({id:id})
@@ -164,6 +177,8 @@ var self = module.exports =  {
                     })
             })
     },
+
+    //更新用户的信息
     update:function (inputs, exits) {
         if (!inputs.body.id){
             return exits.badRequest({
@@ -184,7 +199,30 @@ var self = module.exports =  {
                     data:user
                 })
             })
-    }
+    },
 
+    //查找所有的用户
+    findall:function (inputs, exits) {
+        var pagesize = inputs.query.pagesize;
+        var pageindex = inputs.query.pageindex;
+        if (!pagesize || !pageindex){
+            exits.badRequest({
+                code:"403",
+                msg:"参数格式不正确（缺少分页）"
+            })
+        }
+        sails.models.marketuser.find({skip:(pageindex-1)*pagesize+1, limit:pagesize})
+            .exec(function (err, user) {
+                if (err) return exits.badRequest({
+                    code:"403",
+                    msg:"查询用户过程出错！"
+                });
+                return exits.ok({
+                    code:"201",
+                    msg:"查询所有用户成功！",
+                    data:user
+                })
+            })
+    }
 };
 

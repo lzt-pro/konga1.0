@@ -4,6 +4,7 @@
 
 var unirest = require("unirest");
 var KongService = require("../services/KongService");
+var MarketRouteService = require("../services/MarketRouteService");
 var ProxyHooks = require("../services/KongProxyHooks");
 var _ = require("lodash");
 var Utils = require('../services/Utils');
@@ -152,10 +153,19 @@ var self = module.exports = {
         case "post":
           return ProxyHooks.afterEntityCreate(entity, req, response.body, konga_extras || {}, function (err, data) {
             if(err) return res.badRequest(err);
+            if (entity === 'routes'){
+              var route_id = response.body.id;
+              if (route_id){
+                sails.models.marketroutes.create({id:route_id})
+                    .exec(function (err, route) {
+                      if(err) return res.badRequest(err);
+                      sails.log.debug('成功创建' + route.id + "路由")
+                    })
+              }
+            }
             return res.json(data);
           });
         case "delete":
-
           return ProxyHooks.afterEntityDelete(entity,req,function (err) {
             if(err) return res.badRequest(err);
             if (entity === 'consumers'){
@@ -164,10 +174,16 @@ var self = module.exports = {
                   .exec(function (err, user) {
                     if(err) return res.negotiate(err);
                     user = user_id;
-                    sails.log.debug("成功删除了" + user + "用户")
+                    sails.log.debug("成功删除了" + user + "用户");
+                    return res.json(response);
                   });
             }
-            return res.json(response);
+            if (entity === 'routes'){
+              route_id = req.url.split('/')[2];
+              MarketRouteService.delete(route_id, null,function (route, ruote_null) {
+                return res.json(response);
+              })
+            }
           });
         default:
           return res.json(response.body)
