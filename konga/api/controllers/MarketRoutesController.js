@@ -4,6 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
+var unirest = require("unirest");
 var MarketRouteService = require("../services/MarketRouteService");
 const uuidv4 = require('uuid/v4');
 var self = module.exports = {
@@ -240,10 +241,20 @@ var self = module.exports = {
                     code:'403',
                     msg:'查询过程出现错误'
                 });
-                return exits.ok({
-                    code:'201',
-                    route:route
-                })
+                var request = unirest['get'](sails.config.kong_admin_url + '/routes/' + id);
+                request.end(function (kong_route) {
+                    if (kong_route.error) return exits.badRequest({
+                        code:'403',
+                        msg:'kong查询路由出错！',
+                        data:kong_route.error
+                    });
+                    return exits.ok({
+                        code:'201',
+                        msg:'查询成功',
+                        route:route[0],
+                        kong:kong_route
+                    })
+                });
             })
     },
 
