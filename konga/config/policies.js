@@ -166,23 +166,8 @@ module.exports.policies = {
   MarketUserController:{
     "test":['marketauthenticated'],
     //"logout":['marketauthenticated']
-    "key_auth":['marketauthenticated'],
-    "upadate":['marketauthenticated'],
-    "findOne":['marketauthenticated'],
-    "logout":['marketauthenticated'],
-    "findall":['authenticated']
-  },
-  MarketRoutesController:{
-      "create":['authenticated'],
-      "delete":['authenticated']
-  },
-  MarketPackageController:{
-    "findone":['marketauthenticated'],
-    "findall":['marketauthenticated'],
-    "create":['authenticated']
-  },
-  MarketApplyController:{
-    "create":['marketauthenticated']
+    "key_auth":['marketauthenticated']
   }
+
 
 };
