@@ -167,7 +167,16 @@ module.exports.policies = {
     "test":['marketauthenticated'],
     //"logout":['marketauthenticated']
     "key_auth":['marketauthenticated']
-  }
+  },
+  PurchaseBehaviorController:{
+    'bind':['authenticated'],
+    'rebind':['authenticated'],
+    'getInfoByConsumerId':['authenticated','marketauthenticated'],
+    'putAudit':['marketauthenticated'],
+    'deleteAudit':['marketauthenticated'],
+    'findInfoAudit':['marketauthenticated','authenticated'],
 
+
+  }
 
 };
