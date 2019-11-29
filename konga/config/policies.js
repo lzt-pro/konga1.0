@@ -182,8 +182,18 @@ module.exports.policies = {
   },
   MarketApplyController:{
     'create':['marketauthenticated'],
-  }
+  },
 
+  PurchaseBehaviorController:{
+    'bind':['authenticated'],
+    'rebind':['authenticated'],
+    'getInfoByConsumerId':['authenticated','marketauthenticated'],
+    'putAudit':['marketauthenticated'],
+    'deleteAudit':['marketauthenticated'],
+    'findInfoAudit':['marketauthenticated','authenticated'],
+
+
+  }
 
 
 };
