@@ -171,10 +171,8 @@ module.exports.routes = {
   'GET /api-platform/v1/kong/route':'MarketRoutesController.findone',
   'POST /api-platform/v1/kong/package':'MarketPackageController.create',
   'GET /api-platform/v1/kong/package':'MarketPackageController.findone',
-  'GET /api-platform/v1/kong/packages':'MarketPackageController.findall',
   'POST /api-platform/v1/kong/user/package':'MarketApplyController.create',
   'DELETE /api-platform/v1/kong/route':'MarketRoutesController.delete',
   'GET /api-platform/v1/user':'MarketUserController.findOne',
-  'PUT /api-platform/v1/user':'MarketUserController.update',
-  'GET /api-platform/v1/user/all':"MarketUserController.findall"
+  'PUT /api-platform/v1/user':'MarketUserController.update'
 };
