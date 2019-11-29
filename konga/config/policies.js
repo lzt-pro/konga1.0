@@ -187,10 +187,10 @@ module.exports.policies = {
   PurchaseBehaviorController:{
     'bind':['authenticated'],
     'rebind':['authenticated'],
-    'getInfoByConsumerId':['authenticated','marketauthenticated'],
+    'getInfoByConsumerId':['marketauthenticated'||'authenticated'],
     'putAudit':['marketauthenticated'],
     'deleteAudit':['marketauthenticated'],
-    'findInfoAudit':['marketauthenticated','authenticated'],
+    'findInfoAudit':['marketauthenticated'||'authenticated'],
 
 
   }
