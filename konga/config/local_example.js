@@ -46,7 +46,7 @@ module.exports = {
   session: {
     secret: '' // Add your own SECRET string here
   },
-  port: process.env.PORT || 1338,
+  port: process.env.PORT || 1337,
   environment: process.env.NODE_ENV || 'development',
   log: {
     level: 'info'
