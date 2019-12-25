@@ -1,5 +1,5 @@
 /**
- * MarketPackage.js
+ * Marketkind.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -10,7 +10,7 @@ module.exports = {
   migrate: 'safe',
   autoPK : false,
   primaryKey:'id',
-  tableName:'market_package',
+  tableName:'market_kind',
   attributes: {
     id:{
       primaryKey:true,
@@ -22,26 +22,21 @@ module.exports = {
       type: 'string',
       required: false
     },
-    msg:{
-      type: 'string',
+    createdAt:{
+      type:'string',
       required: false
     },
-    count:{
-      type:'integer',
-      required:false
+    updatedAt:{
+      type:'string',
+      required: false
     },
     routes:{
-      collection: 'marketroutes',
-      via: 'fk_pack_id',
-      through:'marketroutespackages'
+      collection:'marketroutes',
+      via:'fk_kind'
     },
-    users:{
-      collection: "marketuser",
-      via: "fk_pack_id",
-      through: "marketapply"
-    },
-    fk_kind:{
-      model:'marketkind'
+    packages:{
+      collection:'marketpackage',
+      via:'fk_kind'
     }
   },
 };

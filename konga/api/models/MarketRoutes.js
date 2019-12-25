@@ -18,6 +18,10 @@ module.exports = {
       type:'string',
       required: true,
     },
+    name:{
+      type:'string',
+      required: false
+    },
     msg:{
       type:'string',
       required: false
@@ -34,6 +38,9 @@ module.exports = {
       collection : 'marketpackage',
       via: 'fk_route_id',
       through:'marketroutespackages'
+    },
+    fk_kind:{
+      model:'marketkind'
     }
   },
 };

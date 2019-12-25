@@ -67,18 +67,33 @@ module.exports = {
                 msg:"参数中状态不正确"
             })
         }
-        sails.models.marketapply.create(apply)
-            .exec(function (err, apply) {
+        sails.models.marketapply.find({fk_pack_id:apply.fk_pack_id, fk_user_id:apply.fk_user_id})
+            .exec(function (err, apply_r) {
                 if (err) return exits.badRequest({
                     code:"403",
                     msg:"申请API包失败！"
                 });
-                return exits.created({
-                    code:'201',
-                    msg:"申请成功!",
-                    data:apply
-                })
-            })
+                if (apply_r.length !== 0){
+                    return exits.ok({
+                        code:"403",
+                        msg:"该用户已经申请该包！",
+                        data:apply_r[0]
+                    });
+                }
+                sails.models.marketapply.create(apply)
+                    .exec(function (err, apply) {
+                        if (err) return exits.badRequest({
+                            code:"403",
+                            msg:"申请API包失败！"
+                        });
+                        return exits.created({
+                            code:'201',
+                            msg:"申请成功!",
+                            data:apply
+                        })
+                    })
+
+            });
     }
 };
 

@@ -295,7 +295,7 @@
             title: 'Plugins',
             access: AccessLevels.anon
           },
-          {
+          /*{
             state: 'upstreams',
             icon: 'mdi-shuffle-variant',
             show: function () {
@@ -312,7 +312,7 @@
             },
             title: 'Certificates',
             access: AccessLevels.anon
-          },
+          },*/
           {
             title: 'Application',
             show: function () {
@@ -339,7 +339,7 @@
             title: 'Connections',
             access: AccessLevels.anon
           },
-          {
+          /*{
             state: 'snapshots',
             icon: 'mdi-camera',
             show: function () {
@@ -347,7 +347,7 @@
             },
             title: 'Snapshots',
             access: AccessLevels.admin
-          },
+          },*/
           // {
           //   state: 'healthchecks',
           //   icon: 'mdi-heart-outline',
@@ -357,7 +357,7 @@
           //   title: 'Health Checks',
           //   access: AccessLevels.admin
           // },
-          {
+          /*{
             state: 'settings',
             icon: 'mdi-settings',
             show: function () {
@@ -365,7 +365,7 @@
             },
             title: 'Settings',
             access: AccessLevels.admin
-          },
+          },*/
         ];
       }
 

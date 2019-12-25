@@ -78,7 +78,7 @@ module.exports = {
               msg:'没有获取到API包的ID'
           })
       }
-      sails.models.marketpackage.find({where:{id:id},skip:(pageindex-1)*pagesize+1, limit:pagesize})
+      sails.models.marketpackage.find({id:id})
           .populate("routes")
           .exec(function (err, pack) {
               if (err){

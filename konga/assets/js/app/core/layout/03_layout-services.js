@@ -67,7 +67,7 @@
             title: 'Plugins',
             access: AccessLevels.anon
           },
-          {
+          /*{
             state: 'upstreams',
             icon : 'mdi-shuffle-variant',
             show : function() {
@@ -84,7 +84,7 @@
             },
             title: 'Certificates',
             access: AccessLevels.anon
-          }
+          }*/
         ];
       }
     ])

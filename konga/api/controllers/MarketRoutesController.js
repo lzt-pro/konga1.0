@@ -268,6 +268,22 @@ var self = module.exports = {
                 data:route
             });
         });
+    },
+
+    //查找所有的路由
+    findall:function (inputs, exits) {
+        sails.models.marketroutes.find()
+            .exec(function (err, routes) {
+                if (err) return exits.badRequest({
+                    code:"403",
+                    msg:"查询所有的路由过程出错！"
+                });
+                return exits.ok({
+                   code:"201",
+                   msg:"查询成功！",
+                   routes:routes
+                })
+            })
     }
 };
 
