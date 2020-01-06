@@ -127,7 +127,7 @@ module.exports = {
             })
         }
         AdminService.login(inputs.body,function (err, admin) {
-            if (err) return exits.negotiate(err);
+            if (err) return exits.badRequest(err);
             exits.cookie("Admin-token", admin.token, {maxAge:((Date.now()/1000) +(60*60*24))});
             sails.log.debug("Cookie：" + inputs.headers.cookie);
             return exits.ok({
@@ -140,12 +140,18 @@ module.exports = {
     logout:function (inputs, exits) {
         var id = inputs.query.id;
         var token = inputs.cookies['Admin-token'];
+        if (!token){
+            return exits.badRequest({
+                code:"403",
+                msg:"管理员用户没登录！"
+            })
+        }
         jwt.verify(token, process.env.TOKEN_SECRET || "adminsecret",function (error, decode) {
             if (error) return exits.badRequest(error);
             if (id !== decode.data){
                 return exits.badRequest({
                     code:"403",
-                    msg:"该用户没登录！"
+                    msg:"该管理员用户没登录！"
                 })
             }
             try{
