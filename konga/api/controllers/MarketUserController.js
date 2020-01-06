@@ -93,7 +93,7 @@ var self = module.exports =  {
           // If we need them later, they will be available in the `konga_extras` var
           delete req.body.extras;
       }
-        request.headers(KongService.headers(req.connection, true))
+      request.headers(MarketService.headers(req.connection, true));
       request.send(entity);
       delete req.body.password_confirmation;
       request.end(function (response) {

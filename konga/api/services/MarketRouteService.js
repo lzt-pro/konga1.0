@@ -11,6 +11,9 @@ var MarketRouteService = {
                     code:"403",
                     msg:"查询错误"
                 };
+                if (route.length === 0){
+                    return next(route,null,err)
+                }
                 var requests = route[0].requests ? route[0].requests : [];
                 var requests_ids = [];
                 var pack_id = null;
@@ -49,7 +52,7 @@ var MarketRouteService = {
                                                     code:"403",
                                                     msg:"删除路由错误"
                                                 };
-                                                sails.models.marketroutespackages.destroy({fk_pack_id:pack_id})
+                                                sails.models.marketroutespackages.destroy({fk_route_id:id})
                                                     .exec(function (err, market) {
                                                         if(err) return {
                                                           code:"403",

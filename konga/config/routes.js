@@ -186,5 +186,11 @@ module.exports.routes = {
 
   'GET /api-platform/v1/kinds':'MarketKindController.findall',
   'GET /api-platform/v1/kind':'MarketKindController.findone',
-  'GET /api-platform/v1/kong/routes':'MarketRoutesController.findall'
+  'GET /api-platform/v1/kong/routes':'MarketRoutesController.findall',
+
+  'POST /api-platform/v1/kong-admin/user':'AdminUserController.create',
+  'PUT /api-platform/v1/kong-admin/user':'AdminUserController.update',
+  'POST /api-platform/v1/kong-admin/user/login':'AdminUserController.login',
+  'GET /api-platform/v1/kong-admin/user/logout':'AdminUserController.logout'
+
 };
