@@ -20,7 +20,19 @@ var self = module.exports = {
             msg:{
                 type:'string',
                 required: false
-            }
+            },
+            times:{
+                type:'integer',
+                required:false
+            },
+            fk_admin:{
+                type:'string',
+                required: false
+            },
+            fk_image:{
+                type:'string',
+                required: false
+            },
         },
         requests:[
             {
@@ -77,7 +89,7 @@ var self = module.exports = {
                     required:true
                 }
             }
-        ]
+        ],
     },
     exits:{
         created:{
@@ -100,7 +112,13 @@ var self = module.exports = {
            var kong_route = inputs.body.kong_route;
            var requests = route.requests ? route.requests : [];
            var responds = route.responds ? route.responds : [];
-           if (route !== null && kong_route !== null){
+           if (!route.route.fk_admin){
+               return exits.badRequest({
+                   code:"403",
+                   error: "请求错误！服务创建人为空！"
+               })
+           }
+           if (kong_route !== null){
                if (!route.route.name){
                    return exits.badRequest({
                        code:"403",
@@ -159,21 +177,33 @@ var self = module.exports = {
                        })
                    }
                }
-               KongRouteService.create(kong_route, function (err, kong_route_back) {
-                   if (err) return exits.negotiate(err);
-                   route.route.id = kong_route_back.id;
-                   MarketRouteService.create(route, function (err, route_back) {
-                       if (err) return exits.badRequest({
-                           code:"403",
-                           error:err
-                       });
-                       return exits.ok({
-                           code:"201",
-                           route:route_back,
-                           kong_route:kong_route_back
+               if (!route.route.fk_image){
+                   sails.models.marketimage.findOne({name:"Default"})
+                       .exec(function (err, image) {
+                           if (err) return exits.forbidden({
+                               msg:"插入图片发生错误！"
+                           });
+                           if (!image) return exits.forbidden({
+                               msg:"请先上传图片！"
+                           });
+                           route.route.fk_image = image.id;
+                           KongRouteService.create(kong_route, function (err, kong_route_back) {
+                               if (err) return exits.negotiate(err);
+                               route.route.id = kong_route_back.id;
+                               MarketRouteService.create(route, function (err, route_back) {
+                                   if (err) return exits.badRequest({
+                                       code:"403",
+                                       error:err
+                                   });
+                                   return exits.ok({
+                                       code:"201",
+                                       route:route_back,
+                                       kong_route:kong_route_back
+                                   })
+                               });
+                           })
                        })
-                    });
-               })
+               }
            }
         }catch (e) {
                 sails.log.error(e.message);
@@ -187,6 +217,7 @@ var self = module.exports = {
         sails.models.marketroutes.find({id:id})
             .populate('requests')
             .populate('responds')
+            .populate('fk_admin')
             .exec(function (err, route) {
                 if (err) return exits.badRequest({
                     code:'403',

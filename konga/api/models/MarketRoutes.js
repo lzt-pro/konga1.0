@@ -26,6 +26,10 @@ module.exports = {
       type:'string',
       required: false
     },
+    times:{
+      type:'integer',
+      required:false
+    },
     requests:{
       collection:'marketrequests',
       via:'fk_route_id'
@@ -44,6 +48,9 @@ module.exports = {
     },
     fk_admin:{
       model: 'adminuser'
+    },
+    fk_image:{
+      model: 'marketimage'
     }
   },
 };

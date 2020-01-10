@@ -202,5 +202,5 @@ module.exports.routes = {
   'GET /api-platform/v1/kong-admin/user':'AdminUserController.findone',
 
   'GET /api-platform/v1/kong-admin/depart':'AdminDepartController.find',
-  'POST /api-platform/v1/kong-admin/depart':'AdminDepartController.create'
+  'POST /api-platform/v1/kong-admin/depart':'AdminDepartController.create',
 };

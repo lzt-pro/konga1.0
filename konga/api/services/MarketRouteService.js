@@ -73,6 +73,7 @@ var MarketRouteService = {
         var responds = route.responds ? route.responds : [];
         var packages = route.packages ? route.packages : [];
         var market_route = route.route;
+        var admin = route.admin;
         sails.models.marketroutes.find({id:market_route.id})
             .exec(function (err, found) {
                 if (err) next(err);

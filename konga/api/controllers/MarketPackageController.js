@@ -22,6 +22,18 @@ module.exports = {
             type:'integer',
             required:false
         },
+        times:{
+            type:'integer',
+            required:false
+        },
+        fk_admin:{
+            type:'integer',
+            required:false
+        },
+        fk_image:{
+            type:'string',
+            required:true,
+        },
         routes:[
             {
                 id:{
@@ -29,7 +41,7 @@ module.exports = {
                     required:true
                 }
             }
-        ]
+        ],
     },
     exits:{
         created:{
@@ -52,18 +64,30 @@ module.exports = {
         if (!pack.id){
             pack.id = uuidv4();
         }
-        sails.models.marketpackage.create(pack)
-            .exec(function (err, pack) {
-                if (err) return exits.badRequest({
-                    code:'403',
-                    msg:'创建package失败！'
-                });
-                return  exits.created({
-                    code:'201',
-                    msg:'创建package成功',
-                    data:pack
+        if (!inputs.body.fk_image){
+            sails.models.marketimage.findOne({name:"Default"})
+                .exec(function (err, image) {
+                    if (err) return exits.forbidden({
+                        msg:"插入图片发生错误！"
+                    });
+                    if (!image) return exits.forbidden({
+                        msg:"请先上传图片！"
+                    });
+                    pack.fk_image = image.id;
+                    sails.models.marketpackage.create(pack)
+                        .exec(function (err, pack) {
+                            if (err) return exits.badRequest({
+                                code:'403',
+                                msg:'创建package失败！'
+                            });
+                            return  exits.created({
+                                code:'201',
+                                msg:'创建package成功',
+                                data:pack
+                            })
+                        })
                 })
-            })
+        }
   },
 
   //查找该包下所有的路由
@@ -80,6 +104,7 @@ module.exports = {
       }
       sails.models.marketpackage.find({id:id})
           .populate("routes")
+          .populate("fk_image")
           .exec(function (err, pack) {
               if (err){
                   return exits.badRequest({

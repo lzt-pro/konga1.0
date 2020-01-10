@@ -35,6 +35,10 @@ module.exports = {
       via: 'fk_pack_id',
       through:'marketroutespackages'
     },
+    times:{
+      type:'integer',
+      required:false
+    },
     users:{
       collection: "marketuser",
       via: "fk_pack_id",
@@ -45,6 +49,9 @@ module.exports = {
     },
     fk_admin:{
       model: 'adminuser'
+    },
+    fk_image:{
+      model: 'marketimage'
     }
   },
 };

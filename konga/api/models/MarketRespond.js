@@ -34,6 +34,10 @@ module.exports = {
       type:'string',
       required:false
     },
+    times:{
+      type:'integer',
+      required:false
+    },
     fk_route_id: {
       model:'marketroutes'
     }

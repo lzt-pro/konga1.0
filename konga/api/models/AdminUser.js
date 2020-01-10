@@ -48,6 +48,14 @@ module.exports = {
     },
     fk_depart_id:{
       model:'admindepart'
+    },
+    packages:{
+      collection : 'marketpackage',
+      via: 'fk_admin',
+    },
+    routes:{
+      collection : 'marketroutes',
+      via: 'fk_admin',
     }
   },
 };
