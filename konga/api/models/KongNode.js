@@ -24,13 +24,11 @@ var defaultModel = _.merge(_.cloneDeep(require('../base/Model')), {
       type: 'string',
       required: true
     },
-
     type: {
       type: 'string',
       enum: ['default', 'key_auth', 'jwt'],
       defaultsTo: 'default'
     },
-
     kong_admin_url: {
       type: 'string',
       required: true

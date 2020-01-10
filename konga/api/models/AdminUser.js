@@ -45,6 +45,9 @@ module.exports = {
       type:'string',
       required: false,
       email: true
+    },
+    fk_depart_id:{
+      model:'admindepart'
     }
   },
 };

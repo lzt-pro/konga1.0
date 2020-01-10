@@ -41,6 +41,9 @@ module.exports = {
     },
     fk_kind:{
       model:'marketkind'
+    },
+    fk_admin:{
+      model: 'adminuser'
     }
   },
 };

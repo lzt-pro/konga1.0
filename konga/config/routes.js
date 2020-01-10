@@ -191,6 +191,16 @@ module.exports.routes = {
   'POST /api-platform/v1/kong-admin/user':'AdminUserController.create',
   'PUT /api-platform/v1/kong-admin/user':'AdminUserController.update',
   'POST /api-platform/v1/kong-admin/user/login':'AdminUserController.login',
-  'GET /api-platform/v1/kong-admin/user/logout':'AdminUserController.logout'
+  'GET /api-platform/v1/kong-admin/user/logout':'AdminUserController.logout',
+  'GET /api-platform/v1/kong-admin/node':'AdminNodeController.get',
+  'GET /api-platform/v1/kong-admin/target/list':'AdminTargetController.findall',
+  'GET /api-platform/v1/kong-admin/target':'AdminTargetController.find',
+  'PUT /api-platform/v1/kong-admin/target':'AdminTargetController.update',
+  'POST /api-platform/v1/kong-admin/target':'AdminTargetController.create',
+  'DELETE /api-platform/v1/kong-admin/target':'AdminTargetController.delete',
+  'GET /api-platform/v1/kong-admin/user/list':'AdminUserController.findall',
+  'GET /api-platform/v1/kong-admin/user':'AdminUserController.findone',
 
+  'GET /api-platform/v1/kong-admin/depart':'AdminDepartController.find',
+  'POST /api-platform/v1/kong-admin/depart':'AdminDepartController.create'
 };

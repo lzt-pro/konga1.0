@@ -28,10 +28,6 @@ module.exports = {
             type:'string',
             required: false
         },
-        depart:{
-            type:'string',
-            required: false
-        },
         idcard:{
             type:'string',
             required: false
@@ -43,6 +39,10 @@ module.exports = {
         email:{
             type:'string',
             required: false,
+        },
+        fk_depart_id:{
+            type:'string',
+            required: false
         }
     },
     exist:{
@@ -58,7 +58,7 @@ module.exports = {
     },
     create : function (inputs, exits) {
         var entity = inputs.body;
-        if (!entity || !entity.user || !entity.password) {
+        if (!entity || !entity.user || !entity.password || !entity.fk_depart_id) {
             return exits.badRequest({
                 code: "403",
                 msg: "请求参数不完整！"
@@ -161,6 +161,48 @@ module.exports = {
                 throw e;
             }
         })
+    },
+    findall:function (inputs, exits) {
+        sails.models.adminuser.find()
+            .populate("fk_depart_id")
+            .exec(function (err, admins) {
+                if (err) return exits.badRequest({
+                    code:"403",
+                    msg:"查询所有用户出错！"
+                });
+                return exits.ok({
+                    code:"201",
+                    msg:"查询成功！",
+                    data:admins
+                })
+            })
+    },
+    findone:function (inputs, exits) {
+        var id  = inputs.query.id;
+        if (!id){
+            return exits.badRequest({
+                code:"403",
+                msg:"没有获取到该ID"
+            })
+        }
+        sails.models.adminuser.findOne({id:id})
+            .populate("fk_depart_id")
+            .exec(function (err, admin) {
+                if(err) return exits.badRequest({
+                    code:"403",
+                    err:err
+                });
+                if (!admin){
+                    return exits.badRequest({
+                        code:"403",
+                        msg:"没有该管理员用户！"
+                    })
+                }
+                return exits.ok({
+                    code:"201",
+                    data:admin
+                })
+            })
     }
 
 };

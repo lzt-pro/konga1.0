@@ -43,6 +43,7 @@ module.exports = _.merge(_.cloneDeep(require('../base/Controller')), {
     },
 
 
+    //对konga中，与kong连接的逻辑进行改造
     create : function(req,res) {
         sails.models.kongnode.create(req.body)
             .exec(function(err, node){
